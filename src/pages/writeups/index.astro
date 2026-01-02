@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import WriteupCard from '../../components/WriteupCard.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
 const writeups = (await getCollection('writeups', ({ data }) => data.status === 'published')).sort(
 	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
 );
@@ -32,7 +33,7 @@ const formatDate = (date) =>
 			{writeups.length ? (
 				writeups.map((entry, index) => (
 					<WriteupCard
-						href={`/writeups/${entry.slug}/`}
+						href={`${base}writeups/${entry.slug}/`}
 						title={entry.data.title}
 						description={entry.data.description}
 						date={formatDate(entry.data.date)}
