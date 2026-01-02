@@ -5,6 +5,6 @@ const { title, description, date, href, style } = Astro.props;
 <a class="card" href={href} style={style}>
 	<span class="tag">Writeup</span>
 	<h3 class="card__title">{title}</h3>
-	<p class="card__meta">{description}</p>
-	<p class="card__meta">{date}</p>
+	{description ? <p class="card__meta">{description}</p> : null}
+	{date ? <p class="card__meta">{date}</p> : null}
 </a>
