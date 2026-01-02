@@ -1,5 +1,7 @@
 ---
 title: "Injecting Memories into GPT-5 via PDF Prompt Injection"
+description: "A red-team writeup on hidden PDF prompt injection and memory seeding."
+date: 2024-02-02
 status: published
 ---
 
