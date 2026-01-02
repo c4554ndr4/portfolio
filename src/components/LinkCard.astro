@@ -1,0 +1,10 @@
+---
+const { title, description, href, accent, style } = Astro.props;
+const tagClass = accent ? `tag tag--${accent}` : 'tag';
+---
+
+<a class="card" href={href} target="_blank" rel="noreferrer" style={style}>
+	<span class={tagClass}>Link</span>
+	<h3 class="card__title">{title}</h3>
+	<p class="card__meta">{description}</p>
+</a>

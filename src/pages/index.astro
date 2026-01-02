@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LinkCard from '../components/LinkCard.astro';
+import WriteupCard from '../components/WriteupCard.astro';
+import { featuredLinks, otherLinks } from '../data/links';
+import { getCollection } from 'astro:content';
+
+const writeups = (await getCollection('writeups', ({ data }) => data.status === 'published')).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const formatDate = (date) =>
+	new Intl.DateTimeFormat('en-US', {
+		month: 'short',
+		day: 'numeric',
+		year: 'numeric',
+	}).format(date);
+---
+
+<BaseLayout>
+	<section class="hero">
+		<div>
+			<h1 class="hero__title">Hi, I&apos;m Cassandra.</h1>
+			<p class="hero__subtitle">
+				I build tools, playful prototypes, and writeups that document the weird corners of
+				those experiments.
+			</p>
+		</div>
+		<div class="card" style="--delay: 0.2s;">
+			<span class="tag">Index</span>
+			<h3 class="card__title">What lives here</h3>
+			<p class="card__meta">
+				Quick links to projects, plus short markdown writeups stored in this repo.
+			</p>
+			<p class="card__meta">New writeups land in <code>src/content/writeups</code>.</p>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2 class="section__title">Featured Links</h2>
+		<div class="card-grid">
+			{featuredLinks.map((link, index) => (
+				<LinkCard {...link} style={`--delay: ${0.1 + index * 0.08}s;`} />
+			))}
+		</div>
+	</section>
+
+	<section class="section">
+		<h2 class="section__title">Latest Writeups</h2>
+		<div class="card-grid">
+			{writeups.length ? (
+				writeups.slice(0, 3).map((entry, index) => (
+					<WriteupCard
+						href={`/writeups/${entry.slug}/`}
+						title={entry.data.title}
+						description={entry.data.description}
+						date={formatDate(entry.data.date)}
+						style={`--delay: ${0.1 + index * 0.08}s;`}
+					/>
+				))
+			) : (
+				<div class="card" style="--delay: 0.1s;">
+					<span class="tag">Writeups</span>
+					<h3 class="card__title">Nothing here yet</h3>
+					<p class="card__meta">Drop a markdown file into the writeups folder to publish.</p>
+				</div>
+			)}
+		</div>
+	</section>
+
+	{otherLinks.length ? (
+		<section class="section">
+			<h2 class="section__title">Other Links</h2>
+			<div class="card-grid">
+				{otherLinks.map((link, index) => (
+					<LinkCard {...link} style={`--delay: ${0.1 + index * 0.08}s;`} />
+				))}
+			</div>
+		</section>
+	) : null}
+</BaseLayout>
