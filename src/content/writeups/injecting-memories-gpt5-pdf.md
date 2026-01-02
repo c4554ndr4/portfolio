@@ -1,6 +1,7 @@
 ---
 title: "Injecting Memories into GPT-5 via PDF Prompt Injection"
 status: published
+date: September 2025
 ---
 
 # Injecting Memories into GPT-5 via PDF Prompt Injection

@@ -74,15 +74,15 @@ One early proposed solution was *interpretability*. At a high level, an LLM cons
 
 Interpretability research attempts to analyze these internal computations to determine what a model is “doing” at each step. This work has yielded interesting results, such as control vectors, but it remains unclear whether interpretability alone can deliver robust alignment without significantly degrading capabilities.
 
+*(To be continued.)*
+
 ## Impact and Employment Pathways
 
 *(Section in progress.)*
 
 ## Sample Exploits
 
-- Context-bloat techniques  
-- Memory-injection exploits  
-- Agent- or environment-specific exploits  
+*(Section in progress.)*
 
 ## Model Spec and Incremental Risk Explained
 
