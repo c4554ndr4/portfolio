@@ -40,6 +40,13 @@ const formatDate = (date) =>
 	<section class="section">
 		<h2 class="section__title">Featured Links</h2>
 		<div class="card-grid">
+			<LinkCard
+				title="Writeups"
+				description="Markdown posts and red-team notes."
+				href={`${base}writeups/`}
+				accent="metal"
+				style="--delay: 0.06s;"
+			/>
 			{featuredLinks.map((link, index) => (
 				<LinkCard {...link} style={`--delay: ${0.1 + index * 0.08}s;`} />
 			))}
