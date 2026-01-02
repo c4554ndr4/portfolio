@@ -30,6 +30,26 @@ const formatDate = (date) =>
 		<div>
 			<h1 class="hero__title">Cassandra</h1>
 			<p class="hero__subtitle">Links and writeups.</p>
+			<div class="hero__media">
+				<a href="https://x.com/calicomccoy/photo" target="_blank" rel="noreferrer">
+					<img
+						class="hero__image"
+						src="https://x.com/calicomccoy/photo"
+						alt="Calico McCoy photo"
+						loading="lazy"
+						decoding="async"
+					/>
+				</a>
+				<a href="https://x.com/calicomccoy/header_photo" target="_blank" rel="noreferrer">
+					<img
+						class="hero__image"
+						src="https://x.com/calicomccoy/header_photo"
+						alt="Calico McCoy header photo"
+						loading="lazy"
+						decoding="async"
+					/>
+				</a>
+			</div>
 		</div>
 	</section>
 
@@ -69,6 +89,22 @@ const formatDate = (date) =>
 	</section>
 
 	<style>
+		.hero__media {
+			display: grid;
+			gap: 12px;
+			margin-top: 18px;
+		}
+
+		.hero__image {
+			display: block;
+			width: min(100%, 520px);
+			max-height: 220px;
+			object-fit: cover;
+			border-radius: 12px;
+			border: 1px solid rgba(41, 255, 143, 0.18);
+			background: rgba(6, 18, 13, 0.7);
+		}
+
 		.link-list {
 			list-style: none;
 			margin: 0;
