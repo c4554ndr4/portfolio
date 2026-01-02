@@ -28,6 +28,6 @@ Your content here.
 
 ## GitHub Pages
 
-This site is configured for the root GitHub Pages URL at
-`https://c4554ndr4.github.io/`. To use `/writeups/` at that root, publish from a
-user/organization Pages repo named `c4554ndr4.github.io` or a custom domain.
+This site is configured for the `portfolio` repository under
+`https://c4554ndr4.github.io/portfolio/`. The writeups live at
+`https://c4554ndr4.github.io/portfolio/writeups/`.
