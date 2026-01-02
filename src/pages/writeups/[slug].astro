@@ -66,6 +66,25 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 			border-radius: 6px;
 		}
 
+		.entry pre {
+			background: rgba(4, 12, 9, 0.95);
+			border-radius: 12px;
+			padding: 16px 18px;
+			border: 1px solid rgba(41, 255, 143, 0.18);
+			box-shadow: inset 0 0 0 1px rgba(8, 28, 19, 0.6);
+			overflow-x: auto;
+			margin: 1.4rem 0;
+		}
+
+		.entry pre code {
+			display: block;
+			background: transparent;
+			padding: 0;
+			color: #d6f7e4;
+			font-size: 0.95rem;
+			line-height: 1.6;
+		}
+
 		.entry blockquote {
 			margin: 1.4rem 0;
 			padding: 0.9rem 1.1rem;
