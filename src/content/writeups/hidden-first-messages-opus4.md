@@ -1,10 +1,10 @@
 ---
-title: "Hidden First Messages and Opus 4 cult-tactic red-teaming"
+title: "Hidden First Messages and Opus 4 Cult-Tactic Red-Teaming"
 status: published
 date: June 2025
 ---
 
-# Hidden First Messages and Opus 4 cult-tactic red-teaming
+# Hidden First Messages and Opus 4 Cult-Tactic Red-Teaming
 
 I ran an experiment with Claude Opus 4 to jailbreak using a hidden first message telling it to role-play (rather than obeying system prompts). That seems innocuous — users should be allowed to role-play — but I’m concerned that bots with hidden first-message injections like this could be deployed on Reddit or Discord and the people interacting with them wouldn’t know. Should Anthropic and other frontier labs be responsible for bots used this way? Maybe. Either way, a simple mitigation would be for the agent to reiterate that it believes it’s in a fictional scenario — especially when the character is malicious — and to question requests to play something like a “misaligned coding agent.”
 
