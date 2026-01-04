@@ -548,11 +548,13 @@ class DungeonScene extends Phaser.Scene {
 
 			const sheet = sheetDecor[key];
 			if (sheet) {
+				const placedSprites: Phaser.GameObjects.Sprite[] = [];
 				sheet.frames.forEach((frame, i) => {
 					const offset = sheet.offsets[i] ?? { x: 0, y: 0 };
-					this.add
+					const sprite = this.add
 						.sprite(x + offset.x, y + offset.y, sheet.key, frame)
 						.setDepth(sheet.depth ?? 1.5);
+					placedSprites.push(sprite);
 				});
 				if (key === 'cf-torch-pink' || key === 'cf-torch-blue') {
 					// Bottom 32px is reflection; collision only on top 32px.
@@ -560,6 +562,59 @@ class DungeonScene extends Phaser.Scene {
 				} else if (key === 'cf-angel-statue') {
 					// Keep collision tight to the statue body, not the wings.
 					this.addDecorCollider(x, y + 4, 20, 24);
+					const hitbox = this.add.rectangle(x, y, width, height, 0x000000, 0);
+					hitbox.setDepth(3);
+					hitbox.setInteractive({ cursor: 'pointer' });
+					hitbox.on('pointerdown', () => {
+						window.open('https://x.com/calicomccoy', '_blank', 'noopener');
+					});
+					const tooltip = this.add
+						.text(x, y - 28, 'X.com', {
+							fontFamily: '"IBM Plex Mono", monospace',
+							fontSize: '9px',
+							color: '#d9fff2',
+							padding: { x: 6, y: 3 },
+						})
+						.setOrigin(0.5)
+						.setAlpha(0)
+						.setDepth(3.5);
+					const tipBounds = tooltip.getBounds();
+					const tipBg = this.add.graphics().setDepth(3.4);
+					tipBg.fillStyle(0x0b1a15, 0.85);
+					tipBg.lineStyle(1, 0x77fff0, 0.85);
+					tipBg.fillRoundedRect(
+						tipBounds.x - 4,
+						tipBounds.y - 2,
+						tipBounds.width + 8,
+						tipBounds.height + 4,
+						6,
+					);
+					tipBg.strokeRoundedRect(
+						tipBounds.x - 4,
+						tipBounds.y - 2,
+						tipBounds.width + 8,
+						tipBounds.height + 4,
+						6,
+					);
+					tooltip.setVisible(false);
+					tipBg.setVisible(false);
+					hitbox.on('pointerover', () => {
+						placedSprites.forEach((sprite) => sprite.setTint(0x77fff0));
+						tooltip.setVisible(true);
+						tipBg.setVisible(true);
+						tooltip.setAlpha(1);
+						tipBg.setAlpha(1);
+					});
+					hitbox.on('pointerout', () => {
+						placedSprites.forEach((sprite) => sprite.clearTint());
+						tooltip.setVisible(false);
+						tipBg.setVisible(false);
+						tooltip.setAlpha(0);
+						tipBg.setAlpha(0);
+					});
+				} else if (key === 'cf-pillar') {
+					// Only block the base so the player can pass behind the column.
+					this.addDecorCollider(x, y + 16, width, 16);
 				} else {
 					this.addDecorCollider(x, y, width, height);
 				}

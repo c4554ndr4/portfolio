@@ -1,6 +1,23 @@
 ---
+import { getCollection } from 'astro:content';
+
 const base = import.meta.env.BASE_URL;
 const gameScript = import.meta.env.DEV ? '/src/game/entry.ts' : `${base}game/game.js`;
+const writeups = await getCollection('writeups', ({ data }) => data.status === 'published');
+const formatDate = (value?: string | Date) => {
+	if (!value) return '';
+	if (typeof value === 'string') return value;
+	return new Intl.DateTimeFormat('en-US', {
+		month: 'short',
+		day: 'numeric',
+		year: 'numeric',
+	}).format(value);
+};
+const links = [
+	{ title: 'GitHub', href: 'https://github.com/c4554ndr4' },
+	{ title: 'Symbiont Alignment Thesis', href: 'https://future.forum' },
+	{ title: 'X.com', href: 'https://x.com/calicomccoy' },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -30,7 +47,7 @@ const gameScript = import.meta.env.DEV ? '/src/game/entry.ts' : `${base}game/gam
 			body {
 				margin: 0;
 				width: 100%;
-				height: 100%;
+				min-height: 100%;
 				background: radial-gradient(circle at 20% 20%, rgba(98, 45, 140, 0.35), transparent 45%),
 					radial-gradient(circle at 70% 30%, rgba(56, 20, 88, 0.45), transparent 55%),
 					linear-gradient(180deg, #05020a 0%, #090512 60%, #0d061a 100%);
@@ -121,10 +138,240 @@ const gameScript = import.meta.env.DEV ? '/src/game/entry.ts' : `${base}game/gam
 					background-position: 0% 0%, 200% 0%;
 				}
 			}
+
+			.link-view {
+				position: fixed;
+				inset: 0;
+				display: flex;
+				align-items: flex-end;
+				justify-content: center;
+				padding: 24px 20px 28px;
+				background: rgba(5, 2, 10, 0.7);
+				opacity: 0;
+				pointer-events: none;
+				transform: translateY(18px);
+				transition: opacity 0.25s ease, transform 0.25s ease;
+				z-index: 4;
+			}
+
+			.link-view.is-open {
+				opacity: 1;
+				pointer-events: auto;
+				transform: translateY(0);
+			}
+
+			.link-view__card {
+				width: min(920px, 100%);
+				max-height: min(78vh, 640px);
+				overflow: auto;
+				background: rgba(13, 6, 22, 0.9);
+				border: 2px solid rgba(168, 90, 255, 0.55);
+				box-shadow: 0 20px 50px rgba(5, 2, 10, 0.6);
+				border-radius: 16px;
+				padding: 28px;
+			}
+
+			.link-view__profile {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				align-items: center;
+				gap: 16px;
+				margin-bottom: 20px;
+			}
+
+			.link-view__avatar {
+				width: 72px;
+				height: 72px;
+				border-radius: 50%;
+				object-fit: cover;
+				border: 2px solid rgba(210, 140, 255, 0.75);
+				box-shadow: 0 0 0 2px rgba(20, 10, 32, 0.9);
+			}
+
+			.link-view__profile-title {
+				margin: 0 0 6px;
+				font-size: 1rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.link-view__profile-subtitle {
+				margin: 0;
+				font-size: 0.7rem;
+				line-height: 1.6;
+				color: rgba(230, 194, 255, 0.78);
+				font-family: 'IBM Plex Mono', monospace;
+			}
+
+			.link-view__title {
+				margin: 0 0 18px;
+				font-size: 0.95rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+			}
+
+			.link-view__section {
+				margin-bottom: 24px;
+			}
+
+			.link-view__section-title {
+				margin: 0 0 12px;
+				font-size: 0.65rem;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				color: rgba(230, 194, 255, 0.8);
+			}
+
+			.link-view__list {
+				display: grid;
+				gap: 12px;
+			}
+
+			.link-view__item {
+				display: flex;
+				flex-direction: column;
+				gap: 4px;
+				padding: 12px 14px;
+				border-radius: 10px;
+				border: 1px solid rgba(168, 90, 255, 0.4);
+				background: rgba(9, 4, 16, 0.85);
+				text-decoration: none;
+				color: inherit;
+				transition: transform 0.2s ease, border-color 0.2s ease;
+			}
+
+			.link-view__item:hover {
+				transform: translateY(-2px);
+				border-color: rgba(210, 140, 255, 0.75);
+			}
+
+			.link-view__name {
+				font-size: 0.7rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.link-view__meta {
+				font-size: 0.55rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: rgba(230, 194, 255, 0.65);
+			}
+
+			.link-view__desc {
+				font-size: 0.6rem;
+				line-height: 1.5;
+				color: rgba(230, 194, 255, 0.75);
+				font-family: 'IBM Plex Mono', monospace;
+			}
+
+			.link-view__button {
+				position: fixed;
+				right: 18px;
+				bottom: 18px;
+				z-index: 5;
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				padding: 10px 12px;
+				border-radius: 8px;
+				border: 2px solid rgba(168, 90, 255, 0.75);
+				background: rgba(8, 3, 16, 0.9);
+				color: #ead6ff;
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.55rem;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				box-shadow: 0 0 0 2px rgba(14, 6, 24, 0.85);
+			}
+
+			.link-view__button:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 8px 18px rgba(88, 44, 140, 0.45);
+			}
+
+			@media (max-width: 720px) {
+				.link-view {
+					align-items: stretch;
+					padding: 16px;
+				}
+
+				.link-view__card {
+					max-height: 82vh;
+					padding: 20px;
+				}
+
+				.link-view__button {
+					right: 14px;
+					bottom: 14px;
+				}
+			}
 		</style>
 	</head>
 	<body>
 		<div id="game-root" aria-label="Pixel dungeon"></div>
+		<section id="link-view" class="link-view" aria-label="Writeup links">
+			<div class="link-view__card">
+				<div class="link-view__profile">
+					<img
+						class="link-view__avatar"
+						src={`${base}assets/profile_pic.png`}
+						alt="Cassandra McCoy (Melax)"
+					/>
+					<div>
+						<h2 class="link-view__profile-title">Cassandra McCoy (Melax)</h2>
+						<p class="link-view__profile-subtitle">
+							Resesarcher, engineer, seeress, latent space cartographer
+						</p>
+					</div>
+				</div>
+				<div class="link-view__section">
+					<h3 class="link-view__section-title">Writeups</h3>
+					<div class="link-view__list">
+						{writeups.map((entry) => (
+							<a
+								class="link-view__item"
+								href={`${base}writeups/${entry.slug}/`}
+							>
+								<span class="link-view__name">{entry.data.title}</span>
+								{entry.data.date ? (
+									<span class="link-view__meta">{formatDate(entry.data.date)}</span>
+								) : null}
+								{entry.data.description ? (
+									<span class="link-view__desc">{entry.data.description}</span>
+								) : null}
+							</a>
+						))}
+					</div>
+				</div>
+				<div class="link-view__section">
+					<h3 class="link-view__section-title">Links</h3>
+					<div class="link-view__list">
+						{links.map((link) => (
+							<a class="link-view__item" href={link.href}>
+								<span class="link-view__name">{link.title}</span>
+							</a>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+		<button class="link-view__button" type="button">Link View</button>
 		<script type="module" src={gameScript}></script>
+		<script>
+			const linkButton = document.querySelector('.link-view__button');
+			const linkSection = document.getElementById('link-view');
+			const isMobile = window.matchMedia('(max-width: 720px)').matches;
+			const toggleLinks = () => linkSection?.classList.toggle('is-open');
+			linkButton?.addEventListener('click', toggleLinks);
+			if (isMobile) {
+				linkSection?.classList.add('is-open');
+			}
+			linkSection?.addEventListener('click', (event) => {
+				if (event.target === linkSection) {
+					linkSection.classList.remove('is-open');
+				}
+			});
+		</script>
 	</body>
 </html>

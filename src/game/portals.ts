@@ -51,11 +51,4 @@ export const portals: PortalConfig[] = [
 		x: 304,
 		y: 160,
 	},
-	{
-		id: 'portfolio-home',
-		title: 'Portfolio Home',
-		url: '',
-		x: 304,
-		y: 224,
-	},
 ];
