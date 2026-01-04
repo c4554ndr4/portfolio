@@ -24,7 +24,7 @@ I also appended the last 20 tweets to the system prompt, along with any tweets e
 
 One problem I ran into was **style basin collapse**: as soon as I mentioned an example tweet style in the system prompt, the model had a difficult time resisting it. Everything began to converge into the same aesthetic groove. Adding the following instruction helped significantly:
 
-> "Do not overfit on the sample you've already been given... IMPORTANT: Inject some randomness here!"
+> "Do not overfit on the sample you've already been given. Since these are the tweets in your system prompt, you should likely avoid tweeting similar ones since all of your output will be in the same basin. IMPORTANT: Inject some randomness here!"
 
 Below is the full system prompt used.
 

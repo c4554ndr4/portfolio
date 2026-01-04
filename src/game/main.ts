@@ -12,7 +12,7 @@ const mapFile =
 			? 'room-cute.tmj'
 			: mapParam === 'cute-rich'
 				? 'room-cute-rich.tmj'
-				: 'room.tmj';
+				: 'room-cute-rich.tmj';
 const shadersEnabled =
 	typeof window !== 'undefined'
 		? new URLSearchParams(window.location.search).get('fx') !== 'off'
@@ -289,6 +289,7 @@ class DungeonScene extends Phaser.Scene {
 		sprite.on('pointerdown', () => this.enterPortal(sprite));
 		sprite.on('pointerover', () => {
 			sprite.setData('hover', true);
+			sprite.setTint(0xffffff);
 			this.updatePortalLabel(sprite);
 		});
 		sprite.on('pointerout', () => {
@@ -556,6 +557,9 @@ class DungeonScene extends Phaser.Scene {
 				if (key === 'cf-torch-pink' || key === 'cf-torch-blue') {
 					// Bottom 32px is reflection; collision only on top 32px.
 					this.addDecorCollider(x, y - 16, width, height - 32);
+				} else if (key === 'cf-angel-statue') {
+					// Keep collision tight to the statue body, not the wings.
+					this.addDecorCollider(x, y + 4, 20, 24);
 				} else {
 					this.addDecorCollider(x, y, width, height);
 				}
@@ -620,8 +624,9 @@ class DungeonScene extends Phaser.Scene {
 				portal.y,
 			);
 			const near = distance <= PROXIMITY_RADIUS;
-			portal.setTint(near ? 0xffffff : 0xb68cff);
 			portal.setData('near', near);
+			const hover = Boolean(portal.getData('hover'));
+			portal.setTint(near || hover ? 0xffffff : 0xb68cff);
 			this.updatePortalLabel(portal);
 		});
 	}

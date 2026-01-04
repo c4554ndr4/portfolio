@@ -1,7 +1,7 @@
 ---
 const { title, description } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const pageTitle = title ? `${title} | Cassandra Portfolio` : 'Cassandra Portfolio';
+const pageTitle = title ? `${title} | Cassandra Melax` : 'Cassandra Melax';
 const pageDescription =
 	description ??
 		'Portfolio and writeups exploring experiments, tools, and prototypes.';
@@ -17,7 +17,7 @@ const pageDescription =
 		<title>{pageTitle}</title>
 		<meta name="description" content={pageDescription} />
 		<style>
-			@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+			@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap');
 
 			:root {
 				color-scheme: dark;
@@ -92,10 +92,19 @@ const pageDescription =
 
 			.nav {
 				display: flex;
-				align-items: center;
+				align-items: flex-start;
 				justify-content: space-between;
+				flex-wrap: wrap;
 				gap: 16px;
 				margin-bottom: 48px;
+			}
+
+			.nav__brand {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				flex: 1 1 auto;
+				min-width: 0;
 			}
 
 			.nav__title {
@@ -105,12 +114,38 @@ const pageDescription =
 				text-transform: uppercase;
 			}
 
+			.nav__dungeon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0.45rem 0.7rem;
+				border-radius: 6px;
+				border: 2px solid rgba(41, 255, 143, 0.6);
+				background: rgba(11, 22, 17, 0.95);
+				color: #e8ffe9;
+				font-family: 'Press Start 2P', monospace;
+				font-size: 0.55rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				box-shadow: 0 0 0 2px rgba(10, 35, 24, 0.8);
+				position: relative;
+				z-index: 1;
+				width: fit-content;
+				max-width: 220px;
+			}
+
+			.nav__dungeon:hover {
+				transform: translateY(-1px);
+				box-shadow: 0 6px 18px rgba(41, 255, 143, 0.2);
+			}
+
 			.nav__links {
 				display: flex;
 				gap: 16px;
 				flex-wrap: wrap;
 				font-size: 0.95rem;
 				color: var(--ink-soft);
+				margin-left: auto;
 			}
 
 			.hero {
@@ -288,7 +323,10 @@ const pageDescription =
 		<div class="page">
 			<div class="container">
 				<header class="nav">
-					<div class="nav__title">Cassandra Portfolio</div>
+					<div class="nav__brand">
+						<div class="nav__title">Cassandra Melax</div>
+						<a class="nav__dungeon" href={base}>Return to Dungeon</a>
+					</div>
 					<nav class="nav__links">
 						<a href={base}>Home</a>
 						<a href="https://github.com/c4554ndr4">GitHub</a>
