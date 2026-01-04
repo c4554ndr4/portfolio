@@ -1,109 +1,130 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { featuredLinks, otherLinks } from '../data/links';
-import { getCollection } from 'astro:content';
-
 const base = import.meta.env.BASE_URL;
-const writeups = (await getCollection('writeups', ({ data }) => data.status === 'published')).sort(
-	(a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
-);
-
-const externalLinks = [
-	{
-		title: 'The Symbiont Alignment Thesis',
-		href: 'https://future.forum',
-	},
-	...featuredLinks,
-	...otherLinks,
-];
-
-const formatDate = (date) =>
-	new Intl.DateTimeFormat('en-US', {
-		month: 'short',
-		day: 'numeric',
-		year: 'numeric',
-	}).format(date);
+const gameScript = import.meta.env.DEV ? '/src/game/entry.ts' : `${base}game/game.js`;
 ---
-
-<BaseLayout>
-	<section class="hero">
-		<div>
-			<h1 class="hero__title">Cassandra</h1>
-			<p class="hero__subtitle">Links and writeups.</p>
-		</div>
-	</section>
-
-	<section class="section">
-		<h2 class="section__title">Writeups</h2>
-		<ul class="link-list">
-			{writeups.length ? (
-				writeups.map((entry) => (
-					<li class="link-list__item">
-						<a class="link-list__title" href={`${base}writeups/${entry.slug}/`}>
-							{entry.data.title}
-						</a>
-						{entry.data.date ? (
-							<span class="link-list__meta">{formatDate(entry.data.date)}</span>
-						) : null}
-					</li>
-				))
-			) : (
-				<li class="link-list__item">
-					<span class="link-list__title">No writeups yet.</span>
-				</li>
-			)}
-		</ul>
-	</section>
-
-	<section class="section">
-		<h2 class="section__title">Links</h2>
-		<ul class="link-list">
-			{externalLinks.map((link) => (
-				<li class="link-list__item">
-					<a class="link-list__title" href={link.href} target="_blank" rel="noreferrer">
-						{link.title}
-					</a>
-				</li>
-			))}
-		</ul>
-	</section>
-
-	<style>
-		.link-list {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-			display: grid;
-			gap: 12px;
-		}
-
-		.link-list__item {
-			display: flex;
-			align-items: baseline;
-			justify-content: space-between;
-			gap: 16px;
-			padding: 10px 12px;
-			border: 1px solid rgba(41, 255, 143, 0.15);
-			border-radius: 10px;
-			background: rgba(6, 18, 13, 0.7);
-		}
-
-		.link-list__title {
-			font-size: 1rem;
-			letter-spacing: 0.02em;
-		}
-
-		.link-list__meta {
-			font-size: 0.85rem;
-			color: var(--ink-soft);
-			white-space: nowrap;
-		}
-
-		@media (max-width: 600px) {
-			.link-list__item {
-				flex-direction: column;
-				align-items: flex-start;
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Cassandra Dungeon</title>
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+		/>
+		<style>
+			:root {
+				--void: #05020a;
+				--ink: #e6c2ff;
+				--glow: #2d113f;
 			}
-		}
-	</style>
-</BaseLayout>
+
+			* {
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				background: radial-gradient(circle at 20% 20%, rgba(98, 45, 140, 0.35), transparent 45%),
+					radial-gradient(circle at 70% 30%, rgba(56, 20, 88, 0.45), transparent 55%),
+					linear-gradient(180deg, #05020a 0%, #090512 60%, #0d061a 100%);
+				font-family: 'Press Start 2P', monospace;
+				color: var(--ink);
+			}
+
+			#game-root {
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: radial-gradient(circle at 50% 50%, rgba(88, 42, 128, 0.2), transparent 55%);
+			}
+
+			canvas {
+				width: 100%;
+				height: 100%;
+				image-rendering: pixelated;
+				image-rendering: crisp-edges;
+			}
+
+			:global(#dev-toolbar-root) {
+				display: none !important;
+			}
+
+			:global(#shader-overlay) {
+				position: fixed;
+				inset: 0;
+				pointer-events: none;
+				mix-blend-mode: screen;
+				opacity: 0.6;
+				z-index: 2;
+				background:
+					radial-gradient(
+						circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+						rgba(210, 130, 255, 0.55),
+						rgba(120, 50, 190, 0.15) 10%,
+						transparent 18%
+					),
+					radial-gradient(
+						circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+						rgba(120, 60, 200, 0.18),
+						transparent 12%
+					),
+					repeating-linear-gradient(
+						-25deg,
+						rgba(140, 70, 220, 0.05),
+						rgba(140, 70, 220, 0.05) 4px,
+						transparent 4px,
+						transparent 12px
+					);
+				filter: blur(0.15px);
+				animation: shimmer 4s linear infinite;
+			}
+
+			:global(#shader-overlay .shader-glimmer) {
+				position: fixed;
+				left: var(--cursor-x, 50%);
+				top: var(--cursor-y, 50%);
+				width: 12px;
+				height: 12px;
+				border-radius: 999px;
+				transform: translate(-50%, -50%);
+				background: radial-gradient(circle, rgba(221, 164, 255, 0.95), transparent 70%);
+				box-shadow: 0 0 18px rgba(168, 90, 255, 0.9);
+				animation: glimmerPulse 1.8s ease-in-out infinite;
+			}
+
+			@keyframes glimmerPulse {
+				0% {
+					transform: translate(-50%, -50%) scale(0.85);
+				}
+				50% {
+					transform: translate(-50%, -50%) scale(1.1);
+				}
+				100% {
+					transform: translate(-50%, -50%) scale(0.85);
+				}
+			}
+
+			@keyframes shimmer {
+				from {
+					background-position: 0% 0%, 0% 0%;
+				}
+				to {
+					background-position: 0% 0%, 200% 0%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="game-root" aria-label="Pixel dungeon"></div>
+		<script type="module" src={gameScript}></script>
+	</body>
+</html>

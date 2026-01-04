@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Credits" description="Asset credits.">
+	<section class="hero">
+		<div>
+			<h1 class="hero__title">Credits</h1>
+			<p class="hero__subtitle">Art and asset attribution.</p>
+		</div>
+	</section>
+
+	<section class="section">
+		<ul class="link-list">
+			<li class="link-list__item">
+				<span class="link-list__title">MiniRogue Dungeon - tiles and hero sprites</span>
+				<a
+					class="link-list__meta"
+					href="https://matheustanuri.itch.io/minirogue-dungeon"
+					target="_blank"
+					rel="noreferrer"
+				>
+					matheus tanuri
+				</a>
+			</li>
+			<li class="link-list__item">
+				<span class="link-list__title">2D Pixel Art Portal Sprites</span>
+				<a
+					class="link-list__meta"
+					href="https://elthen.itch.io/2d-pixel-art-portal-sprites"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Elthen's Pixel Art Shop
+				</a>
+			</li>
+		</ul>
+	</section>
+
+	<style>
+		.link-list {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: grid;
+			gap: 12px;
+		}
+
+		.link-list__item {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 10px 12px;
+			border: 1px solid rgba(41, 255, 143, 0.15);
+			border-radius: 10px;
+			background: rgba(6, 18, 13, 0.7);
+		}
+
+		.link-list__title {
+			font-size: 1rem;
+			letter-spacing: 0.02em;
+		}
+
+		.link-list__meta {
+			font-size: 0.85rem;
+			color: var(--ink-soft);
+			white-space: nowrap;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+		}
+
+		@media (max-width: 600px) {
+			.link-list__item {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+	</style>
+</BaseLayout>

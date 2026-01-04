@@ -1,0 +1,239 @@
+{
+  "compressionlevel": -1,
+  "height": 9,
+  "infinite": false,
+  "layers": [
+    {
+      "data": [
+        2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+        2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        2,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+        2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
+      ],
+      "height": 9,
+      "id": 1,
+      "name": "Tile Layer 1",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "width": 15,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "name": "Decor",
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "gid": 257,
+          "id": 1,
+          "name": "bookshelf-01",
+          "type": "",
+          "x": 16,
+          "y": 16,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "gid": 258,
+          "id": 2,
+          "name": "bookshelf-02",
+          "type": "",
+          "x": 208,
+          "y": 16,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "gid": 259,
+          "id": 3,
+          "name": "lamp",
+          "type": "",
+          "x": 16,
+          "y": 112,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "flicker", "type": "bool", "value": true }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Portals",
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "gid": 260,
+          "id": 4,
+          "name": "post1",
+          "type": "portal",
+          "x": 48,
+          "y": 64,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "title", "type": "string", "value": "Post 1" },
+            { "name": "url", "type": "string", "value": "#" }
+          ]
+        },
+        {
+          "gid": 260,
+          "id": 5,
+          "name": "post2",
+          "type": "portal",
+          "x": 176,
+          "y": 64,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "title", "type": "string", "value": "Post 2" },
+            { "name": "url", "type": "string", "value": "#" }
+          ]
+        },
+        {
+          "gid": 260,
+          "id": 6,
+          "name": "post3",
+          "type": "portal",
+          "x": 112,
+          "y": 32,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "title", "type": "string", "value": "Post 3" },
+            { "name": "url", "type": "string", "value": "#" }
+          ]
+        },
+        {
+          "gid": 260,
+          "id": 7,
+          "name": "post4",
+          "type": "portal",
+          "x": 112,
+          "y": 96,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            { "name": "title", "type": "string", "value": "Post 4" },
+            { "name": "url", "type": "string", "value": "#" }
+          ]
+        }
+      ]
+    }
+  ],
+  "nextlayerid": 4,
+  "nextobjectid": 9,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "tiledversion": "1.8.2",
+  "tileheight": 16,
+  "tilewidth": 16,
+  "type": "map",
+  "version": 1.4,
+  "width": 15,
+  "tilesets": [
+    {
+      "columns": 16,
+      "firstgid": 1,
+      "image": "tiled/Tile Dungeon.png",
+      "imageheight": 256,
+      "imagewidth": 256,
+      "margin": 0,
+      "name": "Tile Dungeon",
+      "spacing": 0,
+      "tilecount": 256,
+      "tileheight": 16,
+      "tilewidth": 16,
+      "tiles": [
+        {
+          "id": 1,
+          "properties": [
+            { "name": "collides", "type": "bool", "value": true }
+          ]
+        }
+      ]
+    },
+    {
+      "columns": 1,
+      "firstgid": 257,
+      "image": "tiled/Book shelf 01.png",
+      "imageheight": 16,
+      "imagewidth": 16,
+      "margin": 0,
+      "name": "Book shelf 01",
+      "spacing": 0,
+      "tilecount": 1,
+      "tileheight": 16,
+      "tilewidth": 16
+    },
+    {
+      "columns": 1,
+      "firstgid": 258,
+      "image": "tiled/Book shelf 02.png",
+      "imageheight": 16,
+      "imagewidth": 16,
+      "margin": 0,
+      "name": "Book shelf 02",
+      "spacing": 0,
+      "tilecount": 1,
+      "tileheight": 16,
+      "tilewidth": 16
+    },
+    {
+      "columns": 1,
+      "firstgid": 259,
+      "image": "tiled/Lamp.png",
+      "imageheight": 16,
+      "imagewidth": 16,
+      "margin": 0,
+      "name": "Lamp",
+      "spacing": 0,
+      "tilecount": 1,
+      "tileheight": 16,
+      "tilewidth": 16
+    },
+    {
+      "columns": 1,
+      "firstgid": 260,
+      "image": "tiled/portal_placeholder.png",
+      "imageheight": 16,
+      "imagewidth": 16,
+      "margin": 0,
+      "name": "Portal",
+      "spacing": 0,
+      "tilecount": 1,
+      "tileheight": 16,
+      "tilewidth": 16
+    }
+  ]
+}

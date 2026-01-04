@@ -1,0 +1,244 @@
+{
+  "compressionlevel": -1,
+  "height": 16,
+  "infinite": false,
+  "layers": [
+    {
+      "data": [
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 71, 72, 73, 71, 72, 1, 1, 2, 3, 2, 3, 2, 3, 2, 3, 1, 1, 51, 52, 53, 51, 52, 1,
+        1, 81, 82, 83, 81, 82, 1, 1, 3, 7, 8, 7, 8, 7, 8, 2, 1, 1, 61, 62, 63, 61, 62, 1,
+        1, 71, 73, 72, 71, 73, 2, 2, 2, 8, 4, 8, 4, 8, 7, 3, 2, 2, 51, 53, 52, 51, 53, 1,
+        1, 81, 82, 72, 81, 82, 1, 1, 3, 7, 8, 7, 8, 7, 8, 2, 1, 1, 61, 62, 52, 61, 62, 1,
+        1, 71, 83, 73, 71, 83, 1, 1, 2, 3, 2, 3, 2, 3, 2, 3, 1, 1, 51, 63, 53, 51, 63, 1,
+        1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 3, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1,
+        1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 3, 2, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1,
+        1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 7, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 2, 3, 7, 8, 4, 8, 7, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 2, 7, 8, 2, 3, 2, 8, 7, 2, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 101, 102, 103, 101, 102, 103, 101, 2, 3, 2, 101, 103, 102, 101, 103, 102, 101, 102, 1, 1, 1,
+        1, 1, 1, 111, 112, 113, 111, 112, 113, 111, 3, 2, 3, 111, 113, 112, 111, 113, 112, 111, 112, 1, 1, 1,
+        1, 1, 1, 101, 103, 102, 101, 103, 102, 101, 102, 103, 102, 101, 102, 103, 101, 102, 103, 101, 103, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+      ],
+      "height": 16,
+      "id": 1,
+      "name": "Room",
+      "opacity": 1,
+      "type": "tilelayer",
+      "visible": true,
+      "width": 24,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": 2,
+      "name": "Decor",
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 1,
+          "name": "bookshelf-01",
+          "type": "",
+          "x": 24,
+          "y": 24,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 2,
+          "name": "bookshelf-02",
+          "type": "",
+          "x": 72,
+          "y": 24,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 3,
+          "name": "pile-books",
+          "type": "",
+          "x": 312,
+          "y": 24,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 4,
+          "name": "book-red",
+          "type": "",
+          "x": 344,
+          "y": 72,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 5,
+          "name": "lamp",
+          "type": "",
+          "x": 48,
+          "y": 80,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "flicker",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "lamp",
+          "type": "",
+          "x": 328,
+          "y": 80,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "flicker",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "lamp-big",
+          "type": "",
+          "x": 176,
+          "y": 24,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "flicker",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "lamp-big",
+          "type": "",
+          "x": 176,
+          "y": 152,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true,
+          "properties": [
+            {
+              "name": "flicker",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "door",
+          "type": "",
+          "x": 176,
+          "y": 232,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        },
+        {
+          "id": 10,
+          "name": "angel-statue",
+          "type": "",
+          "x": 168,
+          "y": 136,
+          "width": 32,
+          "height": 32,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Spawn",
+      "opacity": 1,
+      "type": "objectgroup",
+      "visible": true,
+      "x": 0,
+      "y": 0,
+      "objects": [
+        {
+          "id": 10,
+          "name": "player",
+          "type": "",
+          "x": 184,
+          "y": 216,
+          "width": 16,
+          "height": 16,
+          "rotation": 0,
+          "visible": true
+        }
+      ]
+    }
+  ],
+  "nextlayerid": 4,
+  "nextobjectid": 11,
+  "orientation": "orthogonal",
+  "renderorder": "right-down",
+  "tiledversion": "1.10.2",
+  "tileheight": 16,
+  "tilewidth": 16,
+  "type": "map",
+  "version": 1.1,
+  "width": 24,
+  "tilesets": [
+    {
+      "columns": 10,
+      "firstgid": 1,
+      "image": "tiles.png",
+      "imageheight": 208,
+      "imagewidth": 160,
+      "margin": 0,
+      "name": "dungeon",
+      "spacing": 0,
+      "tilecount": 130,
+      "tileheight": 16,
+      "tilewidth": 16,
+      "tiles": [
+        {
+          "id": 0,
+          "properties": [
+            {
+              "name": "collides",
+              "type": "bool",
+              "value": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

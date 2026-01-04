@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cute Fantasy Assets - Labeled</title>
+  <style>
+    body {
+      background: #1a1a2e;
+      color: #fff;
+      font-family: monospace;
+      padding: 20px;
+    }
+    h1, h2, h3 { color: #a78bfa; margin-top: 30px; }
+    .section { margin-bottom: 40px; border: 1px solid #333; padding: 15px; border-radius: 8px; }
+    .sprite-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .sprite-item {
+      background: #2d2d44;
+      padding: 8px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .sprite-item canvas {
+      image-rendering: pixelated;
+      border: 1px solid #555;
+      display: block;
+      margin: 0 auto;
+    }
+    .sprite-item .name {
+      font-size: 10px;
+      margin-top: 4px;
+      color: #4ade80;
+      font-weight: bold;
+    }
+    .sprite-item .info {
+      font-size: 9px;
+      color: #888;
+    }
+    .single-sprites img {
+      image-rendering: pixelated;
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #555;
+    }
+    .raw-img {
+      image-rendering: pixelated;
+      border: 2px solid #8b5cf6;
+    }
+    .info-text { color: #888; font-size: 12px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Cute Fantasy Dungeon Assets - Exact Coordinates</h1>
+
+  <!-- RAW SPRITESHEETS -->
+  <div class="section">
+    <h2>Raw Spritesheet Images (reference)</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+      <div>
+        <h3>dungeon-objects.png</h3>
+        <img src="dungeon-objects.png" class="raw-img" style="width: 432px;">
+        <p class="info-text">144x96 px</p>
+      </div>
+      <div>
+        <h3>gold-piles.png</h3>
+        <img src="gold-piles.png" class="raw-img" style="width: 192px;">
+        <p class="info-text">64x48 px</p>
+      </div>
+      <div>
+        <h3>pillars.png</h3>
+        <img src="pillars.png" class="raw-img" style="width: 144px;">
+        <p class="info-text">48x48 px</p>
+      </div>
+      <div>
+        <h3>stairs.png</h3>
+        <img src="stairs.png" class="raw-img" style="width: 144px;">
+        <p class="info-text">48x48 px</p>
+      </div>
+      <div>
+        <h3>metal-grills.png</h3>
+        <img src="metal-grills.png" class="raw-img" style="width: 288px;">
+        <p class="info-text">96x64 px</p>
+      </div>
+      <div>
+        <h3>wooden-bridge.png</h3>
+        <img src="wooden-bridge.png" class="raw-img" style="width: 240px;">
+        <p class="info-text">80x16 px</p>
+      </div>
+      <div>
+        <h3>pressure-plate.png</h3>
+        <img src="pressure-plate.png" class="raw-img" style="width: 144px;">
+        <p class="info-text">48x32 px</p>
+      </div>
+      <div>
+        <h3>dungeon-tileset.png</h3>
+        <img src="dungeon-tileset.png" class="raw-img" style="width: 416px;">
+        <p class="info-text">208x208 px</p>
+      </div>
+      <div>
+        <h3>Dungeon_1.png</h3>
+        <img src="Dungeon_1.png" class="raw-img" style="width: 416px;">
+        <p class="info-text">208x208 px</p>
+      </div>
+      <div>
+        <h3>Dungeon_2.png</h3>
+        <img src="Dungeon_2.png" class="raw-img" style="width: 416px;">
+        <p class="info-text">208x192 px</p>
+      </div>
+      <div>
+        <h3>Dungeon_1_Sewer_Tileset.png</h3>
+        <img src="Dungeon_1_Sewer_Tileset.png" class="raw-img" style="width: 416px;">
+        <p class="info-text">208x80 px</p>
+      </div>
+      <div>
+        <h3>Dungeon_2_Sewer_Tileset.png</h3>
+        <img src="Dungeon_2_Sewer_Tileset.png" class="raw-img" style="width: 416px;">
+        <p class="info-text">208x80 px</p>
+      </div>
+      <div>
+        <h3>Dungeon_2_Arch_small.png</h3>
+        <img src="Dungeon_2_Arch_small.png" class="raw-img" style="width: 336px;">
+        <p class="info-text">112x64 px</p>
+      </div>
+      <div>
+        <h3>Floor_spikes_1.png</h3>
+        <img src="Floor_spikes_1.png" class="raw-img" style="width: 256px;">
+        <p class="info-text">128x32 px</p>
+      </div>
+      <div>
+        <h3>Floor_Spikes_2.png</h3>
+        <img src="Floor_Spikes_2.png" class="raw-img" style="width: 256px;">
+        <p class="info-text">128x32 px</p>
+      </div>
+      <div>
+        <h3>Sewer_Water_Decor.png</h3>
+        <img src="Sewer_Water_Decor.png" class="raw-img" style="width: 192px;">
+        <p class="info-text">48x16 px</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SINGLE SPRITES -->
+  <div class="section">
+    <h2>Single Image Sprites</h2>
+    <div class="sprite-grid" id="single-sprites"></div>
+  </div>
+
+  <!-- DUNGEON OBJECTS -->
+  <div class="section">
+    <h2>Dungeon Objects (extracted by exact coordinates)</h2>
+    <div class="sprite-grid" id="dungeon-objects"></div>
+  </div>
+
+  <!-- GOLD PILES -->
+  <div class="section">
+    <h2>Gold Piles</h2>
+    <div class="sprite-grid" id="gold-piles"></div>
+  </div>
+
+  <!-- PILLARS -->
+  <div class="section">
+    <h2>Pillars</h2>
+    <div class="sprite-grid" id="pillars"></div>
+  </div>
+
+  <!-- STAIRS -->
+  <div class="section">
+    <h2>Stairs</h2>
+    <div class="sprite-grid" id="stairs"></div>
+  </div>
+
+  <!-- METAL GRILLS -->
+  <div class="section">
+    <h2>Metal Grills</h2>
+    <div class="sprite-grid" id="metal-grills"></div>
+  </div>
+
+  <!-- WOODEN BRIDGE -->
+  <div class="section">
+    <h2>Wooden Bridge</h2>
+    <div class="sprite-grid" id="wooden-bridge"></div>
+  </div>
+
+  <!-- PRESSURE PLATES -->
+  <div class="section">
+    <h2>Pressure Plates</h2>
+    <div class="sprite-grid" id="pressure-plates"></div>
+  </div>
+
+  <!-- DUNGEON TILESETS -->
+  <div class="section">
+    <h2>dungeon-tileset.png</h2>
+    <div class="sprite-grid" id="dungeon-tileset"></div>
+  </div>
+
+  <div class="section">
+    <h2>Dungeon_1.png</h2>
+    <div class="sprite-grid" id="dungeon-1-tileset"></div>
+  </div>
+
+  <div class="section">
+    <h2>Dungeon_2.png</h2>
+    <div class="sprite-grid" id="dungeon-2-tileset"></div>
+  </div>
+
+  <div class="section">
+    <h2>Dungeon_1_Sewer_Tileset.png</h2>
+    <div class="sprite-grid" id="dungeon-1-sewer-tileset"></div>
+  </div>
+
+  <div class="section">
+    <h2>Dungeon_2_Sewer_Tileset.png</h2>
+    <div class="sprite-grid" id="dungeon-2-sewer-tileset"></div>
+  </div>
+
+  <div class="section">
+    <h2>Dungeon_2_Arch_small.png</h2>
+    <div class="sprite-grid" id="dungeon-2-arch-small"></div>
+  </div>
+
+  <div class="section">
+    <h2>Floor_spikes_1.png</h2>
+    <div class="sprite-grid" id="floor-spikes-1"></div>
+  </div>
+
+  <div class="section">
+    <h2>Floor_Spikes_2.png</h2>
+    <div class="sprite-grid" id="floor-spikes-2"></div>
+  </div>
+
+  <div class="section">
+    <h2>Sewer_Water_Decor.png</h2>
+    <div class="sprite-grid" id="sewer-water-decor"></div>
+  </div>
+
+  <script>
+    const SCALE = 3;
+
+    // Single sprites
+    const singleSprites = [
+      { name: 'door-closed', file: 'door-closed.png', w: 32, h: 32 },
+      { name: 'door-open', file: 'door-open.png', w: 32, h: 32 },
+      { name: 'arch', file: 'arch.png', w: 32, h: 32 },
+      { name: 'arch-open', file: 'arch-open.png', w: 32, h: 32 },
+      { name: 'gate-closed', file: 'gate-closed.png', w: 32, h: 32 },
+      { name: 'gate-open', file: 'gate-open.png', w: 32, h: 32 },
+      { name: 'stairs-down', file: 'stairs-down.png', w: 16, h: 16 },
+      { name: 'ladder-down', file: 'ladder-down.png', w: 16, h: 16 },
+      { name: 'sewer', file: 'sewer.png', w: 16, h: 16 },
+      { name: 'sewer-tile', file: 'sewer-tile.png', w: 16, h: 16 },
+      { name: 'crossbow-bolt', file: 'crossbow-bolt.png', w: 16, h: 16 },
+      { name: 'Crossbow_Bolt', file: 'Crossbow_Bolt.png', w: 16, h: 16 },
+      { name: 'Ladder_Down_SingleFrame', file: 'Ladder_Down_SingleFrame.png', w: 16, h: 16 },
+      { name: 'Stairs_Down_SingleFrame', file: 'Stairs_Down_SingleFrame.png', w: 16, h: 16 },
+      { name: 'Dungeon_1_Sewer', file: 'Dungeon_1_Sewer.png', w: 16, h: 16 },
+      { name: 'Dungeon_2_Sewer', file: 'Dungeon_2_Sewer.png', w: 16, h: 16 },
+      { name: 'Dungeon_1_Arch', file: 'Dungeon_1_Arch.png', w: 32, h: 32 },
+      { name: 'Dungeon_1_Arch_Open', file: 'Dungeon_1_Arch_Open.png', w: 32, h: 32 },
+      { name: 'Dungeon_1_Door_Closed', file: 'Dungeon_1_Door_Closed.png', w: 32, h: 32 },
+      { name: 'Dungeon_1_Door_Open', file: 'Dungeon_1_Door_Open.png', w: 32, h: 32 },
+      { name: 'Dungeon_1_Door_Single', file: 'Dungeon_1_Door_Single.png', w: 32, h: 32 },
+      { name: 'Dungeon_1_Gate_Closed', file: 'Dungeon_1_Gate_Closed.png', w: 32, h: 32 },
+      { name: 'Dungeon_1_Gate_Open', file: 'Dungeon_1_Gate_Open.png', w: 32, h: 32 },
+      { name: 'Dungeon_1_Stairs', file: 'Dungeon_1_Stairs.png', w: 48, h: 48 },
+      { name: 'Dungeon_2_Arch', file: 'Dungeon_2_Arch.png', w: 32, h: 32 },
+      { name: 'Dungeon_2_Arch_Open', file: 'Dungeon_2_Arch_Open.png', w: 32, h: 32 },
+      { name: 'Dungeon_2_Door_Closed', file: 'Dungeon_2_Door_Closed.png', w: 32, h: 32 },
+      { name: 'Dungeon_2_Door_Open', file: 'Dungeon_2_Door_Open.png', w: 32, h: 32 },
+      { name: 'Dungeon_2_Door_Single', file: 'Dungeon_2_Door_Single.png', w: 32, h: 32 },
+      { name: 'Dungeon_2_Gate_Closed', file: 'Dungeon_2_Gate_Closed.png', w: 32, h: 32 },
+      { name: 'Dungeon_2_Gate_Open', file: 'Dungeon_2_Gate_Open.png', w: 32, h: 32 },
+      { name: 'Dungeon_2_Stairs', file: 'Dungeon_2_Stairs.png', w: 48, h: 48 },
+    ];
+
+    // Dungeon objects - exact pixel coordinates
+    const dungeonObjectSprites = [
+      { name: 'crate-stack', x: 0, y: 0, w: 16, h: 32 },
+      { name: 'bookshelf-small', x: 16, y: 0, w: 16, h: 16 },
+      { name: 'bones-small', x: 32, y: 0, w: 16, h: 16 },
+      { name: 'bookshelf-tall', x: 48, y: 0, w: 16, h: 32 },
+      { name: 'stone-altar', x: 64, y: 0, w: 16, h: 16 },
+      { name: 'pot-brown-lg', x: 80, y: 0, w: 16, h: 32 },
+      { name: 'stone-block-1', x: 96, y: 0, w: 16, h: 32 },
+      { name: 'web-tall-1', x: 113, y: 8, w: 15, h: 15 },
+      { name: 'stone-block-2', x: 128, y: 0, w: 16, h: 32 },
+      { name: 'candle-stand', x: 16, y: 16, w: 16, h: 32 },
+      { name: 'candelabra-3arm', x: 32, y: 16, w: 16, h: 32 },
+      { name: 'bones-scatter', x: 64, y: 16, w: 16, h: 16 },
+      { name: 'candle-single', x: 0, y: 32, w: 16, h: 16 },
+      { name: 'rubble-1', x: 48, y: 32, w: 16, h: 16 },
+      { name: 'rubble-2', x: 64, y: 32, w: 16, h: 16 },
+      { name: 'pot-orange-sm', x: 80, y: 32, w: 16, h: 16 },
+      { name: 'pot-grey-lg', x: 96, y: 32, w: 16, h: 32 },
+      { name: 'web-tall-2', x: 112, y: 40, w: 12, h: 18 },
+      { name: 'coffin-closed', x: 0, y: 48, w: 32, h: 16 },
+      { name: 'angel-statue', x: 7, y: 64, w: 33, h: 32 },
+      { name: 'rubble-3', x: 32, y: 48, w: 16, h: 16 },
+      { name: 'chest-wood', x: 48, y: 48, w: 32, h: 16 },
+      { name: 'pot-orange-lg', x: 80, y: 48, w: 16, h: 32 },
+      { name: 'gravestone-cross', x: 48, y: 64, w: 16, h: 32 },
+      { name: 'gravestone-carved', x: 64, y: 64, w: 16, h: 32 },
+      { name: 'pot-grey-tall', x: 96, y: 64, w: 16, h: 32 },
+      { name: 'lever-right', x: 112, y: 64, w: 16, h: 16 },
+      { name: 'pot-grey-sm', x: 80, y: 80, w: 16, h: 16 },
+      { name: 'lever-left', x: 112, y: 80, w: 16, h: 16 },
+    ];
+
+    // Gold piles
+    const goldSprites = [
+      { name: 'gold-pile-large', x: 0, y: 0, w: 32, h: 32 },
+      { name: 'gold-pile-medium', x: 32, y: 0, w: 32, h: 32 },
+      { name: 'gold-coins-1', x: 0, y: 32, w: 16, h: 16 },
+      { name: 'gold-coins-2', x: 16, y: 32, w: 16, h: 16 },
+      { name: 'gold-coins-3', x: 32, y: 32, w: 16, h: 16 },
+      { name: 'gold-coins-4', x: 48, y: 32, w: 16, h: 16 },
+    ];
+
+    // Pillars (16 wide x 48 tall each)
+    const pillarSprites = [
+      { name: 'pillar-intact', x: 0, y: 0, w: 16, h: 48 },
+      { name: 'pillar-cracked', x: 16, y: 0, w: 16, h: 48 },
+      { name: 'pillar-broken', x: 32, y: 0, w: 16, h: 48 },
+    ];
+
+    // Stairs (single 48x48 sprite)
+    const stairsSprites = [
+      { name: 'stairs-up', x: 0, y: 0, w: 48, h: 48 },
+    ];
+
+    // Metal grills
+    const grillSprites = [
+      { name: 'grill-solid', x: 0, y: 0, w: 48, h: 48 },
+      { name: 'grill-frame', x: 48, y: 0, w: 48, h: 48 },
+      { name: 'grill-gap', x: 16, y: 48, w: 48, h: 16 },
+    ];
+
+    // Wooden bridge (single 80x16 sprite)
+    const bridgeSprites = [
+      { name: 'wooden-bridge', x: 0, y: 0, w: 80, h: 16 },
+    ];
+
+    // Pressure plates
+    const plateSprites = [
+      { name: 'plate-up-left', x: 0, y: 0, w: 16, h: 16 },
+      { name: 'plate-up-mid', x: 16, y: 0, w: 16, h: 16 },
+      { name: 'plate-up-right', x: 32, y: 0, w: 16, h: 16 },
+      { name: 'plate-down-left', x: 0, y: 16, w: 16, h: 16 },
+      { name: 'plate-down-mid', x: 16, y: 16, w: 16, h: 16 },
+      { name: 'plate-down-right', x: 32, y: 16, w: 16, h: 16 },
+    ];
+
+    // Dungeon_2_Arch_small
+    const archSmallSprites = [
+      { name: 'arch-small-1', x: 0, y: 0, w: 16, h: 32 },
+      { name: 'arch-small-2', x: 16, y: 0, w: 16, h: 32 },
+      { name: 'arch-small-3', x: 32, y: 0, w: 16, h: 32 },
+      { name: 'arch-small-4', x: 48, y: 0, w: 16, h: 32 },
+      { name: 'torch-pink', x: 80, y: 0, w: 16, h: 64 },
+      { name: 'torch-blue', x: 96, y: 0, w: 16, h: 64 },
+    ];
+
+    // dungeon-tileset.png (16x16 tiles, labeled by region)
+    const dungeonTilesetSprites = [
+      // Stone frame (large, 3x3 ring)
+      { name: 'stone-frame-1-tl', x: 0, y: 0, w: 16, h: 16 },
+      { name: 'stone-frame-1-top', x: 16, y: 0, w: 16, h: 16 },
+      { name: 'stone-frame-1-tr', x: 32, y: 0, w: 16, h: 16 },
+      { name: 'stone-frame-1-left', x: 0, y: 16, w: 16, h: 16 },
+      { name: 'stone-frame-1-right', x: 32, y: 16, w: 16, h: 16 },
+      { name: 'stone-frame-1-bl', x: 0, y: 32, w: 16, h: 16 },
+      { name: 'stone-frame-1-bottom', x: 16, y: 32, w: 16, h: 16 },
+      { name: 'stone-frame-1-br', x: 32, y: 32, w: 16, h: 16 },
+
+      // Stone frame (small, 2x2)
+      { name: 'stone-frame-2-tl', x: 16, y: 48, w: 16, h: 16 },
+      { name: 'stone-frame-2-tr', x: 32, y: 48, w: 16, h: 16 },
+      { name: 'stone-frame-2-bl', x: 16, y: 64, w: 16, h: 16 },
+      { name: 'stone-frame-2-br', x: 32, y: 64, w: 16, h: 16 },
+
+      // Rock frame (3x3 ring)
+      { name: 'rock-frame-1-tl', x: 64, y: 0, w: 16, h: 16 },
+      { name: 'rock-frame-1-top', x: 80, y: 0, w: 16, h: 16 },
+      { name: 'rock-frame-1-tr', x: 96, y: 0, w: 16, h: 16 },
+      { name: 'rock-frame-1-left', x: 64, y: 16, w: 16, h: 16 },
+      { name: 'rock-frame-1-right', x: 96, y: 16, w: 16, h: 16 },
+      { name: 'rock-frame-1-bl', x: 64, y: 32, w: 16, h: 16 },
+      { name: 'rock-frame-1-bottom', x: 80, y: 32, w: 16, h: 16 },
+      { name: 'rock-frame-1-br', x: 96, y: 32, w: 16, h: 16 },
+
+      // Rock ledge
+      { name: 'rock-ledge-1-left', x: 64, y: 64, w: 16, h: 16 },
+      { name: 'rock-ledge-1-mid', x: 80, y: 64, w: 16, h: 16 },
+      { name: 'rock-ledge-1-right', x: 96, y: 64, w: 16, h: 16 },
+
+      // Rock column
+      { name: 'rock-column-1-top', x: 128, y: 0, w: 16, h: 16 },
+      { name: 'rock-column-1-mid', x: 128, y: 16, w: 16, h: 16 },
+      { name: 'rock-column-1-bottom', x: 128, y: 32, w: 16, h: 16 },
+      { name: 'rock-column-1-cap', x: 128, y: 64, w: 16, h: 16 },
+
+      // Brick wall block (3x3)
+      { name: 'brick-wall-1-tl', x: 160, y: 0, w: 16, h: 16 },
+      { name: 'brick-wall-1-top', x: 176, y: 0, w: 16, h: 16 },
+      { name: 'brick-wall-1-tr', x: 192, y: 0, w: 16, h: 16 },
+      { name: 'brick-wall-1-left', x: 160, y: 16, w: 16, h: 16 },
+      { name: 'brick-wall-1-center', x: 176, y: 16, w: 16, h: 16 },
+      { name: 'brick-wall-1-right', x: 192, y: 16, w: 16, h: 16 },
+      { name: 'brick-wall-1-bl', x: 160, y: 32, w: 16, h: 16 },
+      { name: 'brick-wall-1-bottom', x: 176, y: 32, w: 16, h: 16 },
+      { name: 'brick-wall-1-br', x: 192, y: 32, w: 16, h: 16 },
+
+      // Brick ledge
+      { name: 'brick-ledge-1-left', x: 160, y: 64, w: 16, h: 16 },
+      { name: 'brick-ledge-1-mid', x: 176, y: 64, w: 16, h: 16 },
+      { name: 'brick-ledge-1-right', x: 192, y: 64, w: 16, h: 16 },
+
+      // Rubble floor block (3x3)
+      { name: 'rubble-floor-1-tl', x: 64, y: 96, w: 16, h: 16 },
+      { name: 'rubble-floor-1-top', x: 80, y: 96, w: 16, h: 16 },
+      { name: 'rubble-floor-1-tr', x: 96, y: 96, w: 16, h: 16 },
+      { name: 'rubble-floor-1-left', x: 64, y: 112, w: 16, h: 16 },
+      { name: 'rubble-floor-1-center', x: 80, y: 112, w: 16, h: 16 },
+      { name: 'rubble-floor-1-right', x: 96, y: 112, w: 16, h: 16 },
+      { name: 'rubble-floor-1-bl', x: 64, y: 128, w: 16, h: 16 },
+      { name: 'rubble-floor-1-bottom', x: 80, y: 128, w: 16, h: 16 },
+      { name: 'rubble-floor-1-br', x: 96, y: 128, w: 16, h: 16 },
+
+      // Rubble column
+      { name: 'rubble-column-1-top', x: 128, y: 96, w: 16, h: 16 },
+      { name: 'rubble-column-1-bottom', x: 128, y: 112, w: 16, h: 16 },
+
+      // Brick floor (textured edge vs center)
+      { name: 'brick-floor-edge-tl', x: 160, y: 96, w: 16, h: 16 },
+      { name: 'brick-floor-edge-top', x: 176, y: 96, w: 16, h: 16 },
+      { name: 'brick-floor-edge-tr', x: 192, y: 96, w: 16, h: 16 },
+      { name: 'brick-floor-edge-left', x: 160, y: 112, w: 16, h: 16 },
+      { name: 'brick-floor-center', x: 176, y: 112, w: 16, h: 16 },
+      { name: 'brick-floor-edge-right', x: 192, y: 112, w: 16, h: 16 },
+      { name: 'brick-floor-edge-bl', x: 160, y: 128, w: 16, h: 16 },
+      { name: 'brick-floor-edge-bottom', x: 176, y: 128, w: 16, h: 16 },
+      { name: 'brick-floor-edge-br', x: 192, y: 128, w: 16, h: 16 },
+
+      // Portal frame (left, 3x3 ring)
+      { name: 'portal-left-tl', x: 64, y: 160, w: 16, h: 16 },
+      { name: 'portal-left-top', x: 80, y: 160, w: 16, h: 16 },
+      { name: 'portal-left-tr', x: 96, y: 160, w: 16, h: 16 },
+      { name: 'portal-left-left', x: 64, y: 176, w: 16, h: 16 },
+      { name: 'portal-left-right', x: 96, y: 176, w: 16, h: 16 },
+      { name: 'portal-left-bl', x: 64, y: 192, w: 16, h: 16 },
+      { name: 'portal-left-bottom', x: 80, y: 192, w: 16, h: 16 },
+      { name: 'portal-left-br', x: 96, y: 192, w: 16, h: 16 },
+
+      // Portal frame (right, 3x3)
+      { name: 'portal-right-tl', x: 160, y: 160, w: 16, h: 16 },
+      { name: 'portal-right-top', x: 176, y: 160, w: 16, h: 16 },
+      { name: 'portal-right-tr', x: 192, y: 160, w: 16, h: 16 },
+      { name: 'portal-right-left', x: 160, y: 176, w: 16, h: 16 },
+      { name: 'portal-right-center', x: 176, y: 176, w: 16, h: 16 },
+      { name: 'portal-right-right', x: 192, y: 176, w: 16, h: 16 },
+      { name: 'portal-right-bl', x: 160, y: 192, w: 16, h: 16 },
+      { name: 'portal-right-bottom', x: 176, y: 192, w: 16, h: 16 },
+      { name: 'portal-right-br', x: 192, y: 192, w: 16, h: 16 },
+    ];
+
+    // Helper: create labels
+    function addLabels(div, name, info) {
+      const nameEl = document.createElement('div');
+      nameEl.className = 'name';
+      nameEl.textContent = name;
+      div.appendChild(nameEl);
+      const infoEl = document.createElement('div');
+      infoEl.className = 'info';
+      infoEl.textContent = info;
+      div.appendChild(infoEl);
+    }
+
+    // Render single sprites
+    function renderSingleSprites() {
+      const container = document.getElementById('single-sprites');
+      singleSprites.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'sprite-item';
+        const img = document.createElement('img');
+        img.src = s.file;
+        img.width = s.w * SCALE;
+        img.height = s.h * SCALE;
+        img.style.imageRendering = 'pixelated';
+        div.appendChild(img);
+        addLabels(div, s.name, `${s.w}x${s.h}px`);
+        container.appendChild(div);
+      });
+    }
+
+    // Render sprites from spritesheet using exact coordinates
+    function renderSpritesFromSheet(containerId, file, sprites) {
+      const container = document.getElementById(containerId);
+      const img = new Image();
+      img.src = file;
+      img.onload = () => {
+        sprites.forEach(s => {
+          const div = document.createElement('div');
+          div.className = 'sprite-item';
+
+          const canvas = document.createElement('canvas');
+          canvas.width = s.w * SCALE;
+          canvas.height = s.h * SCALE;
+          const ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = false;
+          ctx.drawImage(img, s.x, s.y, s.w, s.h, 0, 0, s.w * SCALE, s.h * SCALE);
+          div.appendChild(canvas);
+
+          addLabels(div, s.name, `${s.w}x${s.h} @ (${s.x},${s.y})`);
+          container.appendChild(div);
+        });
+      };
+    }
+
+    // Render fixed grid spritesheets (skips empty tiles)
+    function renderGridSheet(containerId, file, tileW, tileH, namePrefix) {
+      const container = document.getElementById(containerId);
+      const img = new Image();
+      img.src = file;
+      img.onload = () => {
+        const cols = Math.floor(img.width / tileW);
+        const rows = Math.floor(img.height / tileH);
+        const temp = document.createElement('canvas');
+        temp.width = img.width;
+        temp.height = img.height;
+        const tctx = temp.getContext('2d');
+        tctx.drawImage(img, 0, 0);
+
+        for (let row = 0; row < rows; row += 1) {
+          for (let col = 0; col < cols; col += 1) {
+            const x = col * tileW;
+            const y = row * tileH;
+            const data = tctx.getImageData(x, y, tileW, tileH).data;
+            let hasPixel = false;
+            for (let i = 3; i < data.length; i += 4) {
+              if (data[i] !== 0) {
+                hasPixel = true;
+                break;
+              }
+            }
+            if (!hasPixel) {
+              continue;
+            }
+
+            const div = document.createElement('div');
+            div.className = 'sprite-item';
+
+            const canvas = document.createElement('canvas');
+            canvas.width = tileW * SCALE;
+            canvas.height = tileH * SCALE;
+            const ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(img, x, y, tileW, tileH, 0, 0, tileW * SCALE, tileH * SCALE);
+            div.appendChild(canvas);
+
+            const name = `${namePrefix}-${x}-${y}`;
+            addLabels(div, name, `${tileW}x${tileH} @ (${x},${y})`);
+            container.appendChild(div);
+          }
+        }
+      };
+    }
+
+    // Render everything
+    renderSingleSprites();
+    renderSpritesFromSheet('dungeon-objects', 'dungeon-objects.png', dungeonObjectSprites);
+    renderSpritesFromSheet('gold-piles', 'gold-piles.png', goldSprites);
+    renderSpritesFromSheet('pillars', 'pillars.png', pillarSprites);
+    renderSpritesFromSheet('stairs', 'stairs.png', stairsSprites);
+    renderSpritesFromSheet('metal-grills', 'metal-grills.png', grillSprites);
+    renderSpritesFromSheet('wooden-bridge', 'wooden-bridge.png', bridgeSprites);
+    renderSpritesFromSheet('pressure-plates', 'pressure-plate.png', plateSprites);
+    renderSpritesFromSheet('dungeon-2-arch-small', 'Dungeon_2_Arch_small.png', archSmallSprites);
+    renderSpritesFromSheet('dungeon-tileset', 'dungeon-tileset.png', dungeonTilesetSprites);
+    renderGridSheet('dungeon-1-tileset', 'Dungeon_1.png', 16, 16, 'dungeon-1');
+    renderGridSheet('dungeon-2-tileset', 'Dungeon_2.png', 16, 16, 'dungeon-2');
+    renderGridSheet('dungeon-1-sewer-tileset', 'Dungeon_1_Sewer_Tileset.png', 16, 16, 'sewer-1');
+    renderGridSheet('dungeon-2-sewer-tileset', 'Dungeon_2_Sewer_Tileset.png', 16, 16, 'sewer-2');
+    renderGridSheet('floor-spikes-1', 'Floor_spikes_1.png', 16, 16, 'floor-spikes-1');
+    renderGridSheet('floor-spikes-2', 'Floor_Spikes_2.png', 16, 16, 'floor-spikes-2');
+    renderGridSheet('sewer-water-decor', 'Sewer_Water_Decor.png', 16, 16, 'sewer-water');
+  </script>
+</body>
+</html>

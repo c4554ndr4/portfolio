@@ -4,11 +4,16 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run build:game",
+    "build:game": "vite build --config vite.game.config.ts",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.6"
+    "astro": "^5.16.6",
+    "phaser": "^3.90.0"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.34.0"
   }
 }

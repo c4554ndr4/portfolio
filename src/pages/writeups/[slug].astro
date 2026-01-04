@@ -12,13 +12,16 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const formattedDate = entry.data.date
-	? new Intl.DateTimeFormat('en-US', {
-			month: 'long',
-			day: 'numeric',
-			year: 'numeric',
-		}).format(entry.data.date)
-	: null;
+const formattedDate =
+	typeof entry.data.date === 'string'
+		? entry.data.date
+		: entry.data.date
+			? new Intl.DateTimeFormat('en-US', {
+					month: 'long',
+					day: 'numeric',
+					year: 'numeric',
+				}).format(entry.data.date)
+			: null;
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>

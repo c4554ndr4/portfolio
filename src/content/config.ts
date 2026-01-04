@@ -4,7 +4,7 @@ const writeups = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional().default(''),
-		date: z.date().optional(),
+		date: z.union([z.date(), z.string()]).optional(),
 		status: z.enum(['draft', 'published']).default('published'),
 	}),
 });
