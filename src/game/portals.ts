@@ -42,20 +42,20 @@ export const portals: PortalConfig[] = [
 		title: 'GitHub',
 		url: 'https://github.com/c4554ndr4',
 		x: 304,
-		y: 96,
+		y: 88,
 	},
 	{
 		id: 'future-forum',
 		title: 'Future Forum',
 		url: 'https://future.forum',
 		x: 304,
-		y: 160,
+		y: 136,
 	},
 	{
 		id: 'discord-symbiont',
 		title: 'Discord Symbiont',
 		url: 'https://c4554ndr4.github.io/Discord_Symbiont/',
 		x: 304,
-		y: 224,
+		y: 184,
 	},
 ];

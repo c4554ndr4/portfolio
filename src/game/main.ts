@@ -113,7 +113,7 @@ class DungeonScene extends Phaser.Scene {
 	}
 
 	create() {
-		this.cameras.main.setBackgroundColor('#05020a');
+		this.cameras.main.setBackgroundColor('#000');
 
 		const map = this.make.tilemap({ key: 'room' });
 		this.tileSize = map.tileWidth || TILE_SIZE;
@@ -143,7 +143,7 @@ class DungeonScene extends Phaser.Scene {
 		this.physics.world.setBounds(0, 0, roomWidth, roomHeight);
 
 		const spawn = map.getObjectLayer('Spawn')?.objects.find((obj) => obj.name === 'player');
-		const spawnX = (spawn?.x ?? roomWidth / 2) + this.tileSize / 2;
+		const spawnX = (spawn?.x ?? roomWidth / 2) + this.tileSize / 2 + 20;
 		const spawnY = (spawn?.y ?? roomHeight / 2) + this.tileSize / 2;
 
 		this.player = this.physics.add
@@ -183,11 +183,12 @@ class DungeonScene extends Phaser.Scene {
 		this.scale.on('resize', () => this.fitCameraToMap(roomWidth, roomHeight));
 
 		const title = this.add
-			.text(roomWidth / 2, 18, 'Cassandra Dungeon', {
-				fontFamily: '"Press Start 2P", monospace',
-				fontSize: '10px',
+			.text(roomWidth / 2, roomHeight * 0.33, "Cassandra's Dungeon", {
+				fontFamily: '"Silkscreen", monospace',
+				fontSize: '16px',
 				color: '#e6c2ff',
 			})
+			.setResolution(3)
 			.setOrigin(0.5)
 			.setDepth(5);
 		this.tweens.add({
@@ -299,11 +300,12 @@ class DungeonScene extends Phaser.Scene {
 
 		const label = this.add
 			.text(portal.x, portal.y - 28, portal.title, {
-				fontFamily: '"IBM Plex Mono", monospace',
-				fontSize: '9px',
+				fontFamily: '"Silkscreen", monospace',
+				fontSize: '12px',
 				color: '#f7e9ff',
 				padding: { x: 6, y: 3 },
 			})
+			.setResolution(3)
 			.setOrigin(0.5)
 			.setAlpha(0)
 			.setDepth(3);
@@ -570,11 +572,14 @@ class DungeonScene extends Phaser.Scene {
 					});
 					const tooltip = this.add
 						.text(x, y - 28, 'X.com', {
-							fontFamily: '"IBM Plex Mono", monospace',
-							fontSize: '9px',
+							fontFamily: '"Silkscreen", monospace',
+							fontSize: '13px',
 							color: '#d9fff2',
+							stroke: '#0b1a15',
+							strokeThickness: 2,
 							padding: { x: 6, y: 3 },
 						})
+						.setResolution(4)
 						.setOrigin(0.5)
 						.setAlpha(0)
 						.setDepth(3.5);
@@ -779,7 +784,7 @@ export const launchDungeon = () => {
 		parent: 'game-root',
 		pixelArt: true,
 		roundPixels: true,
-		backgroundColor: '#05020a',
+		backgroundColor: '#000',
 		physics: {
 			default: 'arcade',
 			arcade: {
