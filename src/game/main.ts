@@ -817,6 +817,23 @@ const autoStart = () => {
 	launchDungeon();
 };
 
+const ensureDungeon = (forceRestart = false) => {
+	if (typeof document === 'undefined') {
+		return;
+	}
+	const root = document.getElementById('game-root');
+	if (!root) {
+		return;
+	}
+	const hasCanvas = Boolean(root.querySelector('canvas'));
+	if (forceRestart || !hasCanvas) {
+		if (shadersEnabled) {
+			setupShaderOverlay();
+		}
+		launchDungeon();
+	}
+};
+
 const setupShaderOverlay = () => {
 	if (document.getElementById('shader-overlay')) {
 		return;
@@ -854,6 +871,17 @@ if (typeof window !== 'undefined') {
 	} else {
 		autoStart();
 	}
+
+	window.addEventListener('pageshow', (event) => {
+		// Restore the game when navigating back from writeups/external links.
+		ensureDungeon(event.persisted);
+	});
+	window.addEventListener('pagehide', () => {
+		if (game) {
+			game.destroy(true);
+			game = null;
+		}
+	});
 }
 
 if (import.meta.hot) {
