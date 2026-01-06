@@ -51,4 +51,11 @@ export const portals: PortalConfig[] = [
 		x: 304,
 		y: 160,
 	},
+	{
+		id: 'discord-symbiont',
+		title: 'Discord Symbiont',
+		url: 'https://c4554ndr4.github.io/Discord_Symbiont/',
+		x: 304,
+		y: 224,
+	},
 ];

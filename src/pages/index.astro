@@ -17,6 +17,7 @@ const links = [
 	{ title: 'GitHub', href: 'https://github.com/c4554ndr4' },
 	{ title: 'Symbiont Alignment Thesis', href: 'https://future.forum' },
 	{ title: 'X.com', href: 'https://x.com/calicomccoy' },
+	{ title: 'Discord Symbiont', href: 'https://c4554ndr4.github.io/Discord_Symbiont/' },
 ];
 ---
 <!doctype html>
@@ -31,6 +32,10 @@ const links = [
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap"
 		/>
 		<style>
 			:root {
@@ -48,9 +53,7 @@ const links = [
 				margin: 0;
 				width: 100%;
 				min-height: 100%;
-				background: radial-gradient(circle at 20% 20%, rgba(98, 45, 140, 0.35), transparent 45%),
-					radial-gradient(circle at 70% 30%, rgba(56, 20, 88, 0.45), transparent 55%),
-					linear-gradient(180deg, #05020a 0%, #090512 60%, #0d061a 100%);
+				background: #000;
 				font-family: 'Press Start 2P', monospace;
 				color: var(--ink);
 			}
@@ -61,7 +64,7 @@ const links = [
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				background: radial-gradient(circle at 50% 50%, rgba(88, 42, 128, 0.2), transparent 55%);
+				background: #000;
 			}
 
 			canvas {
@@ -80,28 +83,20 @@ const links = [
 				inset: 0;
 				pointer-events: none;
 				mix-blend-mode: screen;
-				opacity: 0.6;
+				opacity: 0.7;
 				z-index: 2;
 				background:
 					radial-gradient(
 						circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
 						rgba(210, 130, 255, 0.55),
-						rgba(120, 50, 190, 0.15) 10%,
-						transparent 18%
+						rgba(120, 50, 190, 0.15) 8%,
+						transparent 16%
 					),
 					radial-gradient(
 						circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
 						rgba(120, 60, 200, 0.18),
-						transparent 12%
-					),
-					repeating-linear-gradient(
-						-25deg,
-						rgba(140, 70, 220, 0.05),
-						rgba(140, 70, 220, 0.05) 4px,
-						transparent 4px,
-						transparent 12px
+						transparent 10%
 					);
-				filter: blur(0.15px);
 				animation: shimmer 4s linear infinite;
 			}
 
@@ -139,6 +134,33 @@ const links = [
 				}
 			}
 
+			:global(.sparkle) {
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 10px;
+				height: 10px;
+				border-radius: 999px;
+				pointer-events: none;
+				background: radial-gradient(circle, rgba(255, 255, 255, 0.98), rgba(195, 140, 255, 0.25));
+				box-shadow: 0 0 18px rgba(200, 140, 255, 0.95), 0 0 6px rgba(255, 255, 255, 0.8);
+				transform: translate(-50%, -50%);
+				animation: sparkleFade 0.7s ease-out forwards;
+				z-index: 3;
+				mix-blend-mode: screen;
+			}
+
+			@keyframes sparkleFade {
+				0% {
+					opacity: 0.9;
+					transform: translate(-50%, -50%) scale(1);
+				}
+				100% {
+					opacity: 0;
+					transform: translate(-50%, -90%) scale(0.4);
+				}
+			}
+
 			.link-view {
 				position: fixed;
 				inset: 0;
@@ -161,27 +183,27 @@ const links = [
 			}
 
 			.link-view__card {
-				width: min(920px, 100%);
-				max-height: min(78vh, 640px);
+				width: min(1120px, 98vw);
+				max-height: min(88vh, 760px);
 				overflow: auto;
 				background: rgba(13, 6, 22, 0.9);
 				border: 2px solid rgba(168, 90, 255, 0.55);
 				box-shadow: 0 20px 50px rgba(5, 2, 10, 0.6);
 				border-radius: 16px;
-				padding: 28px;
+				padding: 40px;
 			}
 
 			.link-view__profile {
 				display: grid;
 				grid-template-columns: auto 1fr;
 				align-items: center;
-				gap: 16px;
-				margin-bottom: 20px;
+				gap: 24px;
+				margin-bottom: 28px;
 			}
 
 			.link-view__avatar {
-				width: 72px;
-				height: 72px;
+				width: 96px;
+				height: 96px;
 				border-radius: 50%;
 				object-fit: cover;
 				border: 2px solid rgba(210, 140, 255, 0.75);
@@ -190,14 +212,14 @@ const links = [
 
 			.link-view__profile-title {
 				margin: 0 0 6px;
-				font-size: 1rem;
+				font-size: 1.2rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
 			}
 
 			.link-view__profile-subtitle {
 				margin: 0;
-				font-size: 0.7rem;
+				font-size: 0.85rem;
 				line-height: 1.6;
 				color: rgba(230, 194, 255, 0.78);
 				font-family: 'IBM Plex Mono', monospace;
@@ -216,7 +238,7 @@ const links = [
 
 			.link-view__section-title {
 				margin: 0 0 12px;
-				font-size: 0.65rem;
+				font-size: 0.78rem;
 				letter-spacing: 0.18em;
 				text-transform: uppercase;
 				color: rgba(230, 194, 255, 0.8);
@@ -231,7 +253,7 @@ const links = [
 				display: flex;
 				flex-direction: column;
 				gap: 4px;
-				padding: 12px 14px;
+				padding: 16px 18px;
 				border-radius: 10px;
 				border: 1px solid rgba(168, 90, 255, 0.4);
 				background: rgba(9, 4, 16, 0.85);
@@ -246,20 +268,20 @@ const links = [
 			}
 
 			.link-view__name {
-				font-size: 0.7rem;
+				font-size: 0.86rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
 			}
 
 			.link-view__meta {
-				font-size: 0.55rem;
+				font-size: 0.7rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
 				color: rgba(230, 194, 255, 0.65);
 			}
 
 			.link-view__desc {
-				font-size: 0.6rem;
+				font-size: 0.72rem;
 				line-height: 1.5;
 				color: rgba(230, 194, 255, 0.75);
 				font-family: 'IBM Plex Mono', monospace;
@@ -267,22 +289,23 @@ const links = [
 
 			.link-view__button {
 				position: fixed;
-				right: 18px;
-				bottom: 18px;
+				right: 20px;
+				bottom: 20px;
 				z-index: 5;
 				display: inline-flex;
 				align-items: center;
 				gap: 8px;
-				padding: 10px 12px;
+				padding: 18px 26px;
 				border-radius: 8px;
 				border: 2px solid rgba(168, 90, 255, 0.75);
 				background: rgba(8, 3, 16, 0.9);
 				color: #ead6ff;
 				font-family: 'Press Start 2P', monospace;
-				font-size: 0.55rem;
+				font-size: 0.85rem;
 				text-transform: uppercase;
 				letter-spacing: 0.08em;
 				box-shadow: 0 0 0 2px rgba(14, 6, 24, 0.85);
+				transform: none;
 			}
 
 			.link-view__button:hover {
@@ -297,13 +320,13 @@ const links = [
 				}
 
 				.link-view__card {
-					max-height: 82vh;
-					padding: 20px;
+					max-height: 86vh;
+					padding: 22px;
 				}
 
 				.link-view__button {
-					right: 14px;
 					bottom: 14px;
+					right: 14px;
 				}
 			}
 		</style>
@@ -371,6 +394,20 @@ const links = [
 				if (event.target === linkSection) {
 					linkSection.classList.remove('is-open');
 				}
+			});
+
+			let lastSparkle = 0;
+			const sparkleInterval = 24;
+			window.addEventListener('mousemove', (event) => {
+				const now = performance.now();
+				if (now - lastSparkle < sparkleInterval) return;
+				lastSparkle = now;
+				const sparkle = document.createElement('span');
+				sparkle.className = 'sparkle';
+				sparkle.style.left = `${event.clientX}px`;
+				sparkle.style.top = `${event.clientY}px`;
+				document.body.appendChild(sparkle);
+				sparkle.addEventListener('animationend', () => sparkle.remove());
 			});
 		</script>
 	</body>
