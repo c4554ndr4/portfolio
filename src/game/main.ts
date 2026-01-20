@@ -184,12 +184,8 @@ class DungeonScene extends Phaser.Scene {
 		this.portalSprites = portalList.map((portal) => this.createPortal(portal));
 
 		this.cameras.main.setBounds(0, 0, roomWidth, roomHeight);
-		this.cameras.main.centerOn(roomWidth / 2, roomHeight / 2);
 		this.fitCameraToMap(roomWidth, roomHeight);
-		this.scale.on('resize', () => {
-			this.fitCameraToMap(roomWidth, roomHeight);
-			this.cameras.main.centerOn(roomWidth / 2, roomHeight / 2);
-		});
+		this.scale.on('resize', () => this.fitCameraToMap(roomWidth, roomHeight));
 
 		const title = this.add
 			.text(roomWidth / 2, roomHeight * 0.33, "Cassandra's Dungeon", {
@@ -486,9 +482,12 @@ class DungeonScene extends Phaser.Scene {
 	}
 
 	private fitCameraToMap(roomWidth: number, roomHeight: number) {
-		const scaleX = this.scale.width / roomWidth;
-		const scaleY = this.scale.height / roomHeight;
+		const displayWidth = this.scale.displaySize?.width ?? this.scale.width;
+		const displayHeight = this.scale.displaySize?.height ?? this.scale.height;
+		const scaleX = displayWidth / roomWidth;
+		const scaleY = displayHeight / roomHeight;
 		this.cameras.main.setZoom(Math.min(scaleX, scaleY));
+		this.cameras.main.centerOn(roomWidth / 2, roomHeight / 2);
 	}
 
 	private createDecor(map: Phaser.Tilemaps.Tilemap) {
