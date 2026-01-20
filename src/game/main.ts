@@ -910,6 +910,16 @@ const ensureDungeon = (forceRestart = false) => {
 	}
 };
 
+const refreshDungeonLayout = () => {
+	if (!game) {
+		return;
+	}
+	game.scale.resize(window.innerWidth, window.innerHeight);
+	game.scale.refresh();
+	const scene = game.scene.getScene('dungeon') as DungeonScene | null;
+	scene?.refreshLayout();
+};
+
 const setupShaderOverlay = () => {
 	if (document.getElementById('shader-overlay')) {
 		return;
@@ -957,11 +967,8 @@ if (typeof window !== 'undefined') {
 	window.addEventListener('pageshow', (event) => {
 		// Restore the game when navigating back from writeups/external links.
 		ensureDungeon(event.persisted);
-		if (game) {
-			game.scale.refresh();
-			const scene = game.scene.getScene('dungeon') as DungeonScene | null;
-			scene?.refreshLayout();
-		}
+		refreshDungeonLayout();
+		requestAnimationFrame(() => refreshDungeonLayout());
 	});
 	window.addEventListener('pagehide', () => {
 		if (game) {
