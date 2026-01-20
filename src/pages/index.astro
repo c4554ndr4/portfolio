@@ -137,6 +137,12 @@ const links = [
 				}
 			}
 
+			@media (hover: none) and (pointer: coarse) {
+				body.link-view-open .link-view__button {
+					display: none;
+				}
+			}
+
 			:global(#dev-toolbar-root) {
 				display: none !important;
 			}

@@ -914,11 +914,16 @@ const setupShaderOverlay = () => {
 	if (document.getElementById('shader-overlay')) {
 		return;
 	}
+	const isCoarsePointer =
+		window.matchMedia?.('(pointer: coarse)').matches ||
+		window.matchMedia?.('(hover: none)').matches;
 	const overlay = document.createElement('div');
 	overlay.id = 'shader-overlay';
-	const glimmer = document.createElement('div');
-	glimmer.className = 'shader-glimmer';
-	overlay.appendChild(glimmer);
+	if (!isCoarsePointer) {
+		const glimmer = document.createElement('div');
+		glimmer.className = 'shader-glimmer';
+		overlay.appendChild(glimmer);
+	}
 	document.body.appendChild(overlay);
 
 	let targetX = 0.5;
@@ -934,11 +939,13 @@ const setupShaderOverlay = () => {
 		requestAnimationFrame(update);
 	};
 
-	window.addEventListener('mousemove', (event) => {
-		targetX = event.clientX / window.innerWidth;
-		targetY = event.clientY / window.innerHeight;
-	});
-	update();
+	if (!isCoarsePointer) {
+		window.addEventListener('mousemove', (event) => {
+			targetX = event.clientX / window.innerWidth;
+			targetY = event.clientY / window.innerHeight;
+		});
+		update();
+	}
 };
 
 if (typeof window !== 'undefined') {
