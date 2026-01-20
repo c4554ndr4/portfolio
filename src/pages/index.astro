@@ -82,17 +82,48 @@ const links = [
 				left: 50%;
 				transform: translateX(-50%);
 				z-index: 5;
-				padding: 10px 14px;
-				border-radius: 999px;
+				padding: 12px 18px 12px 16px;
+				border-radius: 16px;
 				background: rgba(10, 6, 18, 0.82);
 				border: 1px solid rgba(230, 194, 255, 0.4);
 				box-shadow: 0 10px 24px rgba(5, 2, 10, 0.35);
-				font-size: 0.55rem;
+				font-size: 0.7rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
-				pointer-events: none;
 				opacity: 0.9;
-				white-space: nowrap;
+				white-space: normal;
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				flex-wrap: wrap;
+				justify-content: center;
+				max-width: calc(100vw - 24px);
+				text-align: center;
+			}
+
+			.mobile-hint__text {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+			}
+
+			.mobile-hint__close {
+				border: none;
+				background: rgba(230, 194, 255, 0.12);
+				color: var(--ink);
+				width: 26px;
+				height: 26px;
+				border-radius: 8px;
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 0.75rem;
+				cursor: pointer;
+				padding: 0;
+			}
+
+			.mobile-hint__close:active {
+				transform: scale(0.95);
 			}
 
 			@media (hover: hover) and (pointer: fine) {
@@ -360,7 +391,12 @@ const links = [
 	</head>
 	<body>
 		<div id="game-root" aria-label="Pixel dungeon"></div>
-		<div class="mobile-hint" aria-hidden="true">Drag to move / Tap to shoot</div>
+		<div class="mobile-hint" role="status" aria-live="polite">
+			<span class="mobile-hint__text">Drag to move / Tap to shoot</span>
+			<button class="mobile-hint__close" type="button" aria-label="Dismiss controls hint">
+				×
+			</button>
+		</div>
 		<section id="link-view" class="link-view" aria-label="Writeup links">
 			<div class="link-view__card">
 				<div class="link-view__profile">
@@ -412,16 +448,18 @@ const links = [
 		<script>
 			const linkButton = document.querySelector('.link-view__button');
 			const linkSection = document.getElementById('link-view');
-			const isMobile = window.matchMedia('(max-width: 720px)').matches;
 			const toggleLinks = () => linkSection?.classList.toggle('is-open');
 			linkButton?.addEventListener('click', toggleLinks);
-			if (isMobile) {
-				linkSection?.classList.add('is-open');
-			}
 			linkSection?.addEventListener('click', (event) => {
 				if (event.target === linkSection) {
 					linkSection.classList.remove('is-open');
 				}
+			});
+
+			const mobileHint = document.querySelector('.mobile-hint');
+			const mobileHintClose = document.querySelector('.mobile-hint__close');
+			mobileHintClose?.addEventListener('click', () => {
+				mobileHint?.remove();
 			});
 
 			let lastSparkle = 0;
