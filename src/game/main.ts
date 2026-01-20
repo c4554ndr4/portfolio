@@ -41,6 +41,8 @@ class DungeonScene extends Phaser.Scene {
 	private projectiles!: Phaser.Physics.Arcade.Group;
 	private lastDirection = 'down';
 	private entering = false;
+	private roomWidth = ROOM_WIDTH;
+	private roomHeight = ROOM_HEIGHT;
 	private activePointerId: number | null = null;
 	private pointerStart = new Phaser.Math.Vector2();
 	private pointerDelta = new Phaser.Math.Vector2();
@@ -145,6 +147,8 @@ class DungeonScene extends Phaser.Scene {
 
 		const roomWidth = map.widthInPixels;
 		const roomHeight = map.heightInPixels;
+		this.roomWidth = roomWidth;
+		this.roomHeight = roomHeight;
 		this.physics.world.setBounds(0, 0, roomWidth, roomHeight);
 
 		const spawn = map.getObjectLayer('Spawn')?.objects.find((obj) => obj.name === 'player');
@@ -185,7 +189,7 @@ class DungeonScene extends Phaser.Scene {
 
 		this.cameras.main.setBounds(0, 0, roomWidth, roomHeight);
 		this.fitCameraToMap(roomWidth, roomHeight);
-		this.scale.on('resize', () => this.fitCameraToMap(roomWidth, roomHeight));
+		this.scale.on('resize', (gameSize) => this.fitCameraToMap(roomWidth, roomHeight, gameSize));
 
 		const title = this.add
 			.text(roomWidth / 2, roomHeight * 0.33, "Cassandra's Dungeon", {
@@ -481,13 +485,17 @@ class DungeonScene extends Phaser.Scene {
 			});
 	}
 
-	private fitCameraToMap(roomWidth: number, roomHeight: number) {
-		const displayWidth = this.scale.displaySize?.width ?? this.scale.width;
-		const displayHeight = this.scale.displaySize?.height ?? this.scale.height;
-		const scaleX = displayWidth / roomWidth;
-		const scaleY = displayHeight / roomHeight;
+	private fitCameraToMap(roomWidth: number, roomHeight: number, size?: Phaser.Structs.Size) {
+		const scaleWidth = size?.width ?? this.scale.width;
+		const scaleHeight = size?.height ?? this.scale.height;
+		const scaleX = scaleWidth / roomWidth;
+		const scaleY = scaleHeight / roomHeight;
 		this.cameras.main.setZoom(Math.min(scaleX, scaleY));
 		this.cameras.main.centerOn(roomWidth / 2, roomHeight / 2);
+	}
+
+	public refreshLayout() {
+		this.fitCameraToMap(this.roomWidth, this.roomHeight);
 	}
 
 	private createDecor(map: Phaser.Tilemaps.Tilemap) {
@@ -943,6 +951,11 @@ if (typeof window !== 'undefined') {
 	window.addEventListener('pageshow', (event) => {
 		// Restore the game when navigating back from writeups/external links.
 		ensureDungeon(event.persisted);
+		if (game) {
+			game.scale.refresh();
+			const scene = game.scene.getScene('dungeon') as DungeonScene | null;
+			scene?.refreshLayout();
+		}
 	});
 	window.addEventListener('pagehide', () => {
 		if (game) {
