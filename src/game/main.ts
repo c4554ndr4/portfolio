@@ -186,7 +186,10 @@ class DungeonScene extends Phaser.Scene {
 		this.cameras.main.setBounds(0, 0, roomWidth, roomHeight);
 		this.cameras.main.centerOn(roomWidth / 2, roomHeight / 2);
 		this.fitCameraToMap(roomWidth, roomHeight);
-		this.scale.on('resize', () => this.fitCameraToMap(roomWidth, roomHeight));
+		this.scale.on('resize', () => {
+			this.fitCameraToMap(roomWidth, roomHeight);
+			this.cameras.main.centerOn(roomWidth / 2, roomHeight / 2);
+		});
 
 		const title = this.add
 			.text(roomWidth / 2, roomHeight * 0.33, "Cassandra's Dungeon", {
