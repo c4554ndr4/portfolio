@@ -169,6 +169,12 @@ const links = [
 				animation: shimmer 4s linear infinite;
 			}
 
+			@media (hover: none) and (pointer: coarse) {
+				:global(#shader-overlay) {
+					display: none;
+				}
+			}
+
 			:global(#shader-overlay .shader-glimmer) {
 				position: fixed;
 				left: var(--cursor-x, 50%);

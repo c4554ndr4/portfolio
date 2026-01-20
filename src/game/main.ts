@@ -917,13 +917,14 @@ const setupShaderOverlay = () => {
 	const isCoarsePointer =
 		window.matchMedia?.('(pointer: coarse)').matches ||
 		window.matchMedia?.('(hover: none)').matches;
+	if (isCoarsePointer) {
+		return;
+	}
 	const overlay = document.createElement('div');
 	overlay.id = 'shader-overlay';
-	if (!isCoarsePointer) {
-		const glimmer = document.createElement('div');
-		glimmer.className = 'shader-glimmer';
-		overlay.appendChild(glimmer);
-	}
+	const glimmer = document.createElement('div');
+	glimmer.className = 'shader-glimmer';
+	overlay.appendChild(glimmer);
 	document.body.appendChild(overlay);
 
 	let targetX = 0.5;
@@ -939,13 +940,11 @@ const setupShaderOverlay = () => {
 		requestAnimationFrame(update);
 	};
 
-	if (!isCoarsePointer) {
-		window.addEventListener('mousemove', (event) => {
-			targetX = event.clientX / window.innerWidth;
-			targetY = event.clientY / window.innerHeight;
-		});
-		update();
-	}
+	window.addEventListener('mousemove', (event) => {
+		targetX = event.clientX / window.innerWidth;
+		targetY = event.clientY / window.innerHeight;
+	});
+	update();
 };
 
 if (typeof window !== 'undefined') {
