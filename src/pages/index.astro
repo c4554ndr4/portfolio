@@ -76,6 +76,31 @@ const links = [
 				touch-action: none;
 			}
 
+			.mobile-hint {
+				position: fixed;
+				top: max(12px, env(safe-area-inset-top));
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 5;
+				padding: 10px 14px;
+				border-radius: 999px;
+				background: rgba(10, 6, 18, 0.82);
+				border: 1px solid rgba(230, 194, 255, 0.4);
+				box-shadow: 0 10px 24px rgba(5, 2, 10, 0.35);
+				font-size: 0.55rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				pointer-events: none;
+				opacity: 0.9;
+				white-space: nowrap;
+			}
+
+			@media (hover: hover) and (pointer: fine) {
+				.mobile-hint {
+					display: none;
+				}
+			}
+
 			:global(#dev-toolbar-root) {
 				display: none !important;
 			}
@@ -335,6 +360,7 @@ const links = [
 	</head>
 	<body>
 		<div id="game-root" aria-label="Pixel dungeon"></div>
+		<div class="mobile-hint" aria-hidden="true">Drag to move / Tap to shoot</div>
 		<section id="link-view" class="link-view" aria-label="Writeup links">
 			<div class="link-view__card">
 				<div class="link-view__profile">
