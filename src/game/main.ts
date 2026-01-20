@@ -41,6 +41,11 @@ class DungeonScene extends Phaser.Scene {
 	private projectiles!: Phaser.Physics.Arcade.Group;
 	private lastDirection = 'down';
 	private entering = false;
+	private activePointerId: number | null = null;
+	private pointerStart = new Phaser.Math.Vector2();
+	private pointerDelta = new Phaser.Math.Vector2();
+	private pointerDragging = false;
+	private pointerJustTapped = false;
 	private tileSize = TILE_SIZE;
 	private mapPath = `${baseUrl}assets/${mapFile}`;
 	private decorHitboxes?: Phaser.Physics.Arcade.StaticGroup;
@@ -158,6 +163,7 @@ class DungeonScene extends Phaser.Scene {
 			Phaser.Input.Keyboard.Key
 		>;
 		this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+		this.setupPointerControls();
 
 		this.createAnimations();
 
@@ -213,19 +219,36 @@ class DungeonScene extends Phaser.Scene {
 
 		let vx = 0;
 		let vy = 0;
-		if (left) {
-			vx = -PLAYER_SPEED;
-			this.lastDirection = 'left';
-		} else if (right) {
-			vx = PLAYER_SPEED;
-			this.lastDirection = 'right';
+		let usingPointer = false;
+		if (this.pointerDragging && this.activePointerId !== null) {
+			const length = this.pointerDelta.length();
+			if (length > 0) {
+				const direction = this.pointerDelta.clone().scale(1 / length);
+				vx = direction.x * PLAYER_SPEED;
+				vy = direction.y * PLAYER_SPEED;
+				usingPointer = true;
+				if (Math.abs(direction.x) > Math.abs(direction.y)) {
+					this.lastDirection = direction.x < 0 ? 'left' : 'right';
+				} else {
+					this.lastDirection = direction.y < 0 ? 'up' : 'down';
+				}
+			}
 		}
-		if (up) {
-			vy = -PLAYER_SPEED;
-			this.lastDirection = 'up';
-		} else if (down) {
-			vy = PLAYER_SPEED;
-			this.lastDirection = 'down';
+		if (!usingPointer) {
+			if (left) {
+				vx = -PLAYER_SPEED;
+				this.lastDirection = 'left';
+			} else if (right) {
+				vx = PLAYER_SPEED;
+				this.lastDirection = 'right';
+			}
+			if (up) {
+				vy = -PLAYER_SPEED;
+				this.lastDirection = 'up';
+			} else if (down) {
+				vy = PLAYER_SPEED;
+				this.lastDirection = 'down';
+			}
 		}
 
 		if (vx !== 0 && vy !== 0) {
@@ -247,6 +270,49 @@ class DungeonScene extends Phaser.Scene {
 		if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
 			this.shootProjectile();
 		}
+		if (this.pointerJustTapped) {
+			this.pointerJustTapped = false;
+			this.shootProjectile();
+		}
+	}
+
+	private setupPointerControls() {
+		const deadzone = 14;
+
+		this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+			if (this.activePointerId !== null) {
+				return;
+			}
+			this.activePointerId = pointer.id;
+			this.pointerStart.set(pointer.x, pointer.y);
+			this.pointerDelta.set(0, 0);
+			this.pointerDragging = false;
+		});
+
+		this.input.on('pointermove', (pointer: Phaser.Input.Pointer) => {
+			if (this.activePointerId === null || pointer.id !== this.activePointerId) {
+				return;
+			}
+			this.pointerDelta.set(pointer.x - this.pointerStart.x, pointer.y - this.pointerStart.y);
+			if (!this.pointerDragging && this.pointerDelta.length() > deadzone) {
+				this.pointerDragging = true;
+			}
+		});
+
+		const handlePointerUp = (pointer: Phaser.Input.Pointer) => {
+			if (this.activePointerId === null || pointer.id !== this.activePointerId) {
+				return;
+			}
+			if (!this.pointerDragging) {
+				this.pointerJustTapped = true;
+			}
+			this.pointerDragging = false;
+			this.pointerDelta.set(0, 0);
+			this.activePointerId = null;
+		};
+
+		this.input.on('pointerup', handlePointerUp);
+		this.input.on('pointerupoutside', handlePointerUp);
 	}
 
 	private createAnimations() {
