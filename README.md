@@ -8,13 +8,9 @@ I built a small dungeon crawler as my personal site's navigation. Visitors explo
 
 **[Play the dungeon crawler](https://c4554ndr4.github.io/portfolio/)** · [My personal website](https://cassie.mccoy.world) · [Explore the game implementation](src/game/main.ts)
 
-## Gameplay
+## Explore the room
 
-[![Recorded gameplay showing movement and mana shots](docs/gameplay/dungeon-playthrough.gif)](docs/gameplay/dungeon-playthrough.mp4)
-
-[Watch the gameplay video (MP4)](docs/gameplay/dungeon-playthrough.mp4) · [Play it yourself](https://c4554ndr4.github.io/portfolio/)
-
-A recording from the live game, shown as a looping preview above.
+![The dungeon room with the player character and animated portals](docs/screenshots/dungeon-room.png)
 
 The room is a compact, one-room exploration experience. Portals turn spatial navigation into website navigation: approaching one reveals its destination, and entering it plays a transition before opening the linked page. The fireballs and animated scenery make the room feel like a place to play while browsing.
 

@@ -57,4 +57,4 @@ The scene loads assets from `public/assets`, including player and portal sprites
 
 The live dungeon is hosted at `https://c4554ndr4.github.io/portfolio/`. `.github/workflows/deploy.yml` builds and deploys pushes to `main` through GitHub Pages. A deployment-path change must be reflected in `astro.config.mjs`, `vite.config.ts`, and `vite.game.config.ts`.
 
-For interaction changes, check movement and collision boundaries, keyboard and pointer projectiles, portal transitions, direct Link View, and returning from a linked page. The recording in `docs/gameplay` shows movement and mana shots in the live game. Update the MP4 and its animated preview when the gameplay changes materially.
+For interaction changes, check movement and collision boundaries, keyboard and pointer projectiles, portal transitions, direct Link View, and returning from a linked page. The screenshot in `docs/screenshots/dungeon-room.png` shows the live dungeon. Update it when the interface changes materially.
