@@ -1,3 +1,5 @@
+(AI-assisted writeup)
+
 My github projects are presented with AI-assisted writing that I've reviewed. If you would like to check out my fully-human thoughts on my projects, please see my personal website [cassie.mccoy.world](https://cassie.mccoy.world)
 
 # Personal Site Dungeon Crawler
@@ -25,16 +27,9 @@ The room is a compact, one-room exploration experience. Portals turn spatial nav
 
 The architecture separates the room, the game behavior, and the content it points to. A map describes tiles, obstacles, decoration, and portal locations. The game handles movement, collisions, projectiles, animations, and nearby-portal feedback. Portal destinations connect those interactions to normal website pages.
 
-```mermaid
-flowchart LR
-    M[Room map and portal destinations] --> G[Interactive dungeon]
-    I[Keyboard or touch input] --> G
-    G --> B[Movement, collisions and fireballs]
-    G --> P[Approach or enter a portal]
-    P --> T[Animated transition]
-    T --> W[Essay or project page]
-    L[Direct Link View] --> W
-```
+![A schematic room shows how approaching and entering a portal becomes navigation to a static page. Link View reaches the same content directly.](docs/project-idea.png)
+
+*Conceptual navigation map; the screenshot above shows the actual room.*
 
 The site pages and game bundle are built together for a static deployment. There is no application server required for the dungeon itself. The game can be rebuilt after a navigation change, while essays remain independently readable pages.
 
