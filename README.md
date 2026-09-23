@@ -1,3 +1,5 @@
+(AI-assisted writeup)
+
 # Personal Site Dungeon Crawler
 
 **A playable front door to my writing and projects.**
