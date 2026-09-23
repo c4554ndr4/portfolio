@@ -8,9 +8,13 @@ I built a small dungeon crawler as my personal site's navigation. Visitors explo
 
 **[Play the dungeon crawler](https://c4554ndr4.github.io/portfolio/)** · [My personal website](https://cassie.mccoy.world) · [Explore the game implementation](src/game/main.ts)
 
-## Explore the room
+## Gameplay
 
-![The live dungeon: a player character, glowing windows, stone walls, and purple portals](docs/screenshots/dungeon-room.png)
+[![Recorded gameplay showing movement and mana shots](docs/gameplay/dungeon-playthrough.gif)](docs/gameplay/dungeon-playthrough.mp4)
+
+[Watch the gameplay video (MP4)](docs/gameplay/dungeon-playthrough.mp4) · [Play it yourself](https://c4554ndr4.github.io/portfolio/)
+
+A recording from the live game, shown as a looping preview above.
 
 The room is a compact, one-room exploration experience. Portals turn spatial navigation into website navigation: approaching one reveals its destination, and entering it plays a transition before opening the linked page. The fireballs and animated scenery make the room feel like a place to play while browsing.
 
@@ -20,14 +24,6 @@ The room is a compact, one-room exploration experience. Portals turn spatial nav
 | Cast a fireball | Space | Tap in the game area |
 | Open a destination | Walk into a portal | Tap or enter a portal |
 | Browse links directly | Select **Link View** | Select **Link View** |
-
-## The same site, a direct route
-
-![The site's Link View, showing the author's introduction and a list of research write-ups](docs/screenshots/link-view.png)
-
-The writing also has ordinary pages and links. The dungeon is an interactive entrance to that content; readers can use the link index whenever they want a quicker route.
-
-Both screenshots were captured from the live GitHub Pages site on September 23, 2026.
 
 ## How it works
 
